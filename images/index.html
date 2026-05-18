@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* max-width: 1100px; */
+
+        margin: auto;
+        /*padding: 20px;*/
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+        overflow-x: hidden;
+      }
+
+      .website-container {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #1e293b;
+        padding: 20px;
+      }
+
+      .why-content img {
+        width: 100%;
+        border-radius: 20px;
+      }
+
+      .feature {
+        margin-bottom: 20px;
+      }
+
+      /* TESTIMONIALS */
+      .testimonials-section {
+        padding: 80px 20px;
+        text-align: center;
+      }
+
+      .testimonials-grid {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .testimonial-card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+      }
+
+      /* FOOTER */
+      footer {
+        background: #0f172a;
+        color: white;
+        padding: 60px 20px;
+      }
+
+      .footer-grid {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 30px;
+        opacity: 0.7;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .hero-content,
+        .why-content,
+        .services-grid,
+        .testimonials-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-text h1 {
+          font-size: 36px;
+        }
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        padding: 15px 30px;
+        background: #d4ff00;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1e3a8a;
+        letter-spacing: 0.5px;
+        flex: 1;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        flex: 1;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: #1e3a8a;
+      }
+
+      .nav-cta .quote-btn {
+        display: flex;
+        flex: 1;
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .nav-cta .quote-btn:hover {
+        background: #1d4ed8;
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .site-header {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          flex: 1;
+          justify-content: center;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo">SecureLife</div>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button class="quote-btn">Get Quote</button>
+      </div>
+    </header>
+
+    <div class="website-container">
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Protect Your Family & Your Future</h1>
+            <p>
+              Affordable health and life insurance plans tailored to your needs.
+              Get personalized guidance from a trusted local insurance agent.
+            </p>
+
+            <div class="hero-buttons">
+              <button class="primary-btn">Get a Free Quote</button>
+              <button class="secondary-btn">Call Now</button>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h2>Request Information</h2>
+
+            <form id="insurance-form">
+              <input type="text" placeholder="Full Name" required />
+              <input type="email" placeholder="Email Address" required />
+              <input type="tel" placeholder="Phone Number" required />
+
+              <select>
+                <option>Interested In</option>
+                <option>Health Insurance</option>
+                <option>Life Insurance</option>
+                <option>Family Coverage</option>
+                <option>Medicare Plans</option>
+              </select>
+
+              <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="services-section">
+        <h2>Insurance Services</h2>
+        <p class="section-description">
+          Helping individuals and families find reliable coverage with clear,
+          honest guidance.
+        </p>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🏥</div>
+            <h3>Health Insurance</h3>
+            <p>
+              Affordable plans for individuals, families, and small businesses.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">❤️</div>
+            <h3>Life Insurance</h3>
+            <p>Protect your loved ones with long-term financial security.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">👨‍👩‍👧‍👦</div>
+            <h3>Family Coverage</h3>
+            <p>Customized plans designed around your family’s unique needs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="why-section">
+        <div class="why-content">
+          <img
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop"
+            alt="Insurance Consultation"
+          />
+
+          <div class="why-text">
+            <h2>Why Clients Trust Us</h2>
+
+            <div class="feature">
+              <h3>✔ Personalized Guidance</h3>
+              <p>
+                We help clients compare plans and understand coverage options.
+              </p>
+            </div>
+
+            <div class="feature">
+              <h3>✔ Affordable Solutions</h3>
+              <p>
+                Find plans that fit both your healthcare needs and your budget.
+              </p>
+            </div>
+
+            <div class="feature">
+              <h3>✔ Ongoing Support</h3>
+              <p>Assistance before, during, and after enrollment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials-section">
+        <h2>What Clients Say</h2>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p>
+              “Excellent service and helped my family find affordable coverage.”
+            </p>
+            <h4>— Maria G.</h4>
+          </div>
+
+          <div class="testimonial-card">
+            <p>“Very professional and explained every option clearly.”</p>
+            <h4>— Carlos R.</h4>
+          </div>
+
+          <div class="testimonial-card">
+            <p>“The process was easy and stress-free from start to finish.”</p>
+            <h4>— Jennifer T.</h4>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-grid">
+          <div>
+            <h3>SecureLife Insurance</h3>
+            <p>Helping families protect their health and financial future.</p>
+          </div>
+
+          <div>
+            <h4>Contact</h4>
+            <p>Email: info@securelife.com</p>
+            <p>Phone: (555) 123-4567</p>
+            <p>Location: Texas, USA</p>
+          </div>
+
+          <div>
+            <h4>Office Hours</h4>
+            <p>Monday – Friday</p>
+            <p>9:00 AM – 6:00 PM</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          © 2026 SecureLife Insurance. All rights reserved.
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
