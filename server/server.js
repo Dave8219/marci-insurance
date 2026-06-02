@@ -6,6 +6,7 @@ const cors = require("cors");
 const { pool } = require("./db.js");
 
 const leads = require("./routes/leads.js");
+const clients = require("./routes/clients.js");
 
 const rateLimiter = require("express-rate-limit");
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1", leads);
+app.use("/api/v1", clients);
 
 const limiter = rateLimiter({
   windowMs: 15 * 60 * 1000,
