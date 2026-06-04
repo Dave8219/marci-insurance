@@ -1,4 +1,5 @@
 const { pool } = require("../db.js");
+const sendLeadEmail = require("../utils/leadMail.js");
 
 // user logs in to see all leads
 const getAllLeads = async (req, res) => {
@@ -22,6 +23,9 @@ const createLead = async (req, res) => {
     const [newLead] = await pool.query(`SELECT * FROM leads WHERE id = ?`, [
       result.insertId,
     ]);
+
+    await sendLeadEmail({ name, email, phone, insurance_type });
+
     res.status(201).json(newLead[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
