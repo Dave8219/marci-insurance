@@ -5,6 +5,9 @@ import heroImg from "./assets/hero.png";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import "./App.css";
+import Dashboard from "./Dashboard.jsx";
+import Leads from "./Leads.jsx";
+import Clients from "./Clients.jsx";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -122,9 +125,13 @@ function App() {
 */
 
   //  <Home />;
+  // <Dashboard />
+  // <Login />
+  // <Leads />
+  // <Clients />
   return (
     <>
-      <Login />
+      <Clients />
     </>
   );
 }

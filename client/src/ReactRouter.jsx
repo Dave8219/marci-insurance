@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Clients from "./Clients.jsx";
 import Leads from "./Leads.jsx";
 import Login from "./Login.jsx";
-import Welcome from "./Welcome.jsx";
+import Dashboard from "./Dashboard.jsx";
 
 const ReactRouter = () => {
   return (
