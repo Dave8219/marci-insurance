@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
@@ -8,6 +9,9 @@ import "./App.css";
 import Dashboard from "./Dashboard.jsx";
 import Leads from "./Leads.jsx";
 import Clients from "./Clients.jsx";
+import HealthInsurance from "./HealthInsurance.jsx";
+import LifeInsurance from "./LifeInsurance.jsx";
+import Medicare from "./Medicare.jsx";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -129,9 +133,19 @@ function App() {
   // <Login />
   // <Leads />
   // <Clients />
+  // <HealthInsurance />
   return (
     <>
-      <Clients />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/leads" element={<Leads />} />
+        <Route path="/clients" element={<Clients />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/health-insurance" element={<HealthInsurance />} />
+        <Route path="/medicare" element={<Medicare />} />
+        <Route path="/life-insurance" element={<LifeInsurance />} />
+      </Routes>
     </>
   );
 }

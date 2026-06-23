@@ -1,11 +1,7 @@
 import { useState } from "react";
 import "./dashboard.css";
-/*
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Clients from "./Clients.jsx";
-import Leads from "./Leads.jsx";
-import Login from "./Login.jsx";
-*/
+
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -13,11 +9,12 @@ const Dashboard = () => {
       <div className="dashboard-page">
         <header className="site-header">
           <div className="logo">
-            <img src="src/assets/ins-logo.png" className="img-logo" />
-          </div>
-
-          <div className="logout-box">
-            <h5 className="logout-text">Logout</h5>
+            <Link to="/">
+              <img
+                src="src/assets/barrera-logo-no-background.png"
+                className="img-logo"
+              />
+            </Link>
           </div>
         </header>
         <main>
@@ -30,10 +27,14 @@ const Dashboard = () => {
                 <h1 className="admin-title">Admin Dashboard</h1>
               </div>
               <div>
-                <button className="view-leads-btn">Leads</button>
+                <Link to="/leads">
+                  <button className="view-leads-btn">Leads</button>
+                </Link>
               </div>
               <div>
-                <button className="view-clients-btn">Clients</button>
+                <Link to="/clients">
+                  <button className="view-clients-btn">Clients</button>
+                </Link>
               </div>
             </section>
           </div>

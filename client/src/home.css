@@ -154,11 +154,13 @@ footer {
 .logo {
   display: flex;
   flex: 1;
+  margin-top: 8px;
 }
 
 .img-logo {
-  width: 175px;
-  height: 140px;
+  width: 185px;
+  height: 150px;
+  padding: 4px;
 }
 
 .nav-links {
@@ -181,6 +183,15 @@ footer {
 
 .quote-text {
   color: white;
+}
+
+.ins-agent-picture {
+  height: auto;
+  object-fit: cover;
+  width: 62px;
+  border-radius: 50%;
+  object-position: top;
+  margin-right: 8px;
 }
 
 .banner {
@@ -712,6 +723,25 @@ body {
     display: none;
   }
 
+  .ins-agent-picture {
+    height: auto;
+    object-fit: cover;
+    width: 50px;
+    border-radius: 50%;
+    object-position: top;
+    margin-right: 8px;
+  }
+
+  .phone-icon {
+    font-size: 15px;
+    position: relative;
+    top: 8px;
+  }
+
+  .phone-number-nav {
+    font-size: 0.75rem;
+  }
+
   /* Show mobile menu */
   .mobile-menu-wrapper {
     display: flex;
@@ -785,6 +815,11 @@ body {
 }
 
 input {
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.input-submit-form {
   font-size: 1rem;
   padding: 4px;
 }

@@ -1,0 +1,245 @@
+.video-player {
+  height: 400px;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.267);
+  height: 490px;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  top: 100px;
+  z-index: 2;
+}
+
+/*
+Section 2
+*/
+.coverage-section {
+  background: #ffffff;
+  margin-top: 25px;
+}
+
+.coverage-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.coverage-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.coverage-text h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.coverage-text ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.coverage-text li {
+  margin-bottom: 8px;
+}
+
+.coverage-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.coverage-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Section 3 */
+
+.benefits-section {
+  background: #8da5ed;
+  text-align: center;
+}
+
+.benefits-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+.benefit-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+}
+
+.benefit-card h3 {
+  margin-bottom: 10px;
+}
+
+/* Section 4 */
+
+.extras-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  margin: auto;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #f0f3ff, #d8daf5, #b8c4e9);
+  overflow: hidden;
+}
+
+.extras-section::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -100px;
+  width: 500px;
+  height: 300px;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+  transform: rotate(-20deg);
+
+  pointer-events: none;
+}
+
+.extras-image {
+  flex: 1;
+  min-width: 300px;
+  height: 500px;
+  place-content: center;
+}
+
+.extras-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.extras-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.extras-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.extras-list > div {
+  margin-bottom: 15px;
+}
+
+.relax-outdoors {
+  height: auto;
+  width: 500px;
+  object-fit: contain;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+/* Section 5 */
+
+.marketplace-section {
+  background: #20135860;
+  text-align: center;
+}
+
+.marketplace-content {
+  max-width: 800px;
+  margin: auto;
+  padding: 50px;
+}
+
+.marketplace-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.marketplace-content p {
+  line-height: normal;
+}
+
+.marketplace-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #002f6c;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.marketplace-btn:hover {
+  background: #003c8fd2;
+}
+
+/* Section 6 - CTA */
+
+.health-cta {
+  background: #1e3a8a;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.health-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.cta-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: white;
+  color: #1e3a8a;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: #e5e7eb;
+}
+
+.ins-clip-art {
+  border-radius: 50%;
+  height: auto;
+  width: 200px;
+  object-fit: contain;
+  padding: 15px;
+}

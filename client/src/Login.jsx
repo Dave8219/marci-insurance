@@ -1,4 +1,5 @@
 import { useStare } from "react";
+import { Link } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
@@ -7,7 +8,12 @@ const Login = () => {
       <div className="login-page">
         <header className="site-header">
           <div className="logo">
-            <img src="src/assets/ins-logo.png" className="img-logo" />
+            <Link to="/">
+              <img
+                src="src/assets/barrera-logo-no-background.png"
+                className="img-logo"
+              />
+            </Link>
           </div>
 
           <div className="tagline">

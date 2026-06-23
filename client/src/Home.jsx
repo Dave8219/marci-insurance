@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import ReactRouter from "./ReactRouter";
+
+import { Link } from "react-router-dom";
 import "./home.css";
 
 const Home = () => {
@@ -79,26 +80,36 @@ const Home = () => {
       </div>
       <header className="site-header">
         <div className="logo">
-          <img src="src/assets/ins-logo.png" className="img-logo" />
+          <img
+            src="src/assets/barrera-logo-no-background.png"
+            className="img-logo"
+          />
         </div>
 
         <nav className="nav-links">
-          <a href="#home">Home</a>
+          <Link to="/">Home</Link>
           <div className="dropdown">
             <a href="#services" className="drop-btn">
               Services
             </a>
             <div className="dropdown-content">
-              <a href="#health">Health Insurance</a>
-              <a href="#medicare">Medicare</a>
-              <a href="life-insurance.html">Life Insurance</a>
+              <Link to="/health-insurance">Health Insurance</Link>
+              <Link to="/medicare">Medicare</Link>
+              <Link to="/life-insurance">Life Insurance</Link>
             </div>
           </div>
 
           <a href="#why">Why Us</a>
           <a href="#contact">Contact</a>
         </nav>
+
         <div className="contact-info">
+          <img
+            src="/src/assets/marci-picture.jpeg"
+            alt="Picture of Insurance Agent"
+            className="ins-agent-picture"
+          />
+
           <i className="fa-solid fa-phone phone-icon"></i>
           <p className="phone-number-nav">(956) 283-4343</p>
         </div>
@@ -117,9 +128,9 @@ const Home = () => {
                 Services
               </a>
               <div className="dropdown-content">
-                <a href="#health">Health Insurance</a>
-                <a href="#medicare">Medicare</a>
-                <a href="life-insurance.html">Life Insurance</a>
+                <Link to="/health-insurance">Health Insurance</Link>
+                <Link to="/medicare">Medicare</Link>
+                <Link to="/life-insurance">Life Insurance</Link>
               </div>
             </div>
 
@@ -196,6 +207,13 @@ const Home = () => {
                     <i className="fa-solid fa-notes-medical"></i>Obamacare
                   </h2>
                 </li>
+
+                <li>
+                  <h2>
+                    <i className="fa-solid fa-umbrella-beach"></i>Retirement
+                  </h2>
+                </li>
+
                 <li>
                   <h2>
                     <i className="fa-solid fa-tooth"></i>Dental
@@ -204,6 +222,11 @@ const Home = () => {
                 <li>
                   <h2>
                     <i className="fa-solid fa-eye"></i>Vision
+                  </h2>
+                </li>
+                <li>
+                  <h2>
+                    <i className="fa-solid fa-dove"></i>Pre-Need Funeral Plans
                   </h2>
                 </li>
               </ul>
@@ -236,7 +259,7 @@ const Home = () => {
                   type="text"
                   name="name"
                   value={formData.name}
-                  className="input"
+                  className="input-submit-form"
                   placeholder="Full Name"
                   required
                   onChange={handleChange}
@@ -245,7 +268,7 @@ const Home = () => {
                   type="email"
                   name="email"
                   value={formData.email}
-                  className="input"
+                  className="input-submit-form"
                   onChange={handleChange}
                   placeholder="Email Address"
                   required
@@ -254,7 +277,7 @@ const Home = () => {
                   type="tel"
                   name="phone"
                   value={formData.phone}
-                  className="input"
+                  className="input-submit-form"
                   onChange={handleChange}
                   placeholder="Phone Number"
                   required
@@ -418,7 +441,7 @@ const Home = () => {
         <div className="footer-grid">
           <div>
             <img
-              src="src/assets/Ins Logo2.png"
+              src="src/assets/m-barrera-logo.png"
               alt="company logo"
               className="img-logo-2"
             />
@@ -436,11 +459,11 @@ const Home = () => {
 
           <div>
             <h4>Office Hours</h4>
-            <p>Monday – Friday</p>
+            <p>Monday – Saturday</p>
             <p>9:00 AM – 6:00 PM</p>
           </div>
         </div>
-        <div class="footer-bottom">
+        <div className="footer-bottom">
           © 2026 Marci Insurance. All rights reserved.
         </div>
       </footer>

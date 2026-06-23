@@ -3,6 +3,12 @@
   min-height: 100vh;
 }
 
+.main-content-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-left: 0;
+}
+
 .title-container {
   font-weight: bold;
   margin-bottom: 15px;
@@ -11,14 +17,25 @@
 .title-container,
 .lead-info-box {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 100%;
-  max-width: 1000px; /* key fix */
+  grid-template-columns: repeat(7, 1fr);
+
+  width: 1300px; /* key fix */
+
   gap: 10px;
   text-align: center;
 }
 
-.title-container > div,
+.edit-color {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.title-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .lead-info-box > div {
   display: flex;
   justify-content: center;
@@ -30,6 +47,7 @@
   padding: 12px;
   border-radius: 8px;
   align-items: center;
+  cursor: pointer;
 }
 
 .lead-info-box p {
@@ -47,11 +65,43 @@ h1 {
   color: white;
 }
 
-h2 {
+.leads-titles {
   color: white;
 }
 
-p {
+.paragraph-info {
+  color: white;
+}
+
+.status-badge-container {
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-new {
+  background: #7f1d1d;
+  color: white;
+}
+
+.status-contacted {
+  background: #1e40af;
+  color: white;
+}
+
+.status-client {
+  background: #166534;
   color: white;
 }
 
@@ -60,13 +110,63 @@ p {
   margin-top: 30px;
 }
 
+.leads-heading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+}
+
 .leads-container {
   display: flex;
   flex-direction: column;
+  row-gap: 8px;
   align-items: center;
   margin-top: 25px;
+  min-width: max-content;
 }
 
+.leads-edit-btn {
+  font-size: 1rem;
+  padding: 2px;
+}
+
+.leads-save-btn {
+  font-size: 1rem;
+  padding: 2px;
+}
+
+.leads-delete-btn {
+  font-size: 1rem;
+  padding: 2px;
+}
+
+.add-lead-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.add-lead-btn {
+  font-size: 1rem;
+  padding: 6px;
+  text-align: center;
+}
+
+.save-lead-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.save-lead-btn {
+  font-size: 1rem;
+  padding: 6px;
+  text-align: center;
+}
+
+/*
 .edit-delete-btn-box-editing {
   display: flex;
   flex-direction: column;
@@ -74,7 +174,7 @@ p {
   cursor: pointer;
   justify-content: space-evenly;
 }
-
+*/
 .edit-delete-btn-box {
   display: flex;
   flex-direction: column;
@@ -83,10 +183,11 @@ p {
   justify-content: space-evenly;
 }
 
-input {
+.edit-lead-input {
   font-size: 1rem;
   padding: 6px;
   /* width: 140px;*/
+  width: 140px;
   text-align: center;
   justify-content: center;
   align-content: center;
@@ -103,4 +204,87 @@ input {
 
 .footer-container {
   text-align: center;
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .title-container,
+  .lead-info-box,
+  .leads-container {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .leads-heading {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .leads-titles {
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  .paragraph-info {
+    font-size: 0.98rem;
+    padding: 4px;
+  }
+
+  .leads-edit-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
+
+  .leads-save-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
+
+  .leads-delete-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
+}
+
+/* Phones */
+
+@media (max-width: 480px) {
+  .title-container,
+  .lead-info-box,
+  .leads-container {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .leads-heading {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .leads-titles {
+    color: white;
+    font-size: 1rem;
+  }
+
+  .paragraph-info {
+    font-size: 0.95rem;
+    padding: 4px;
+  }
+
+  .leads-edit-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
+
+  .leads-save-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
+
+  .leads-delete-btn {
+    font-size: 0.92rem;
+    padding: 1px;
+  }
 }

@@ -1,5 +1,23 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./clients.css";
+
+const formatPhoneNumber = (value) => {
+  const phoneNumber = value.replace(/\D/g, "");
+
+  if (phoneNumber.length < 4) {
+    return phoneNumber;
+  }
+
+  if (phoneNumber.length < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
+
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+    3,
+    6,
+  )}-${phoneNumber.slice(6, 10)}`;
+};
 
 const Clients = () => {
   const [showForm, setShowForm] = useState(false);
@@ -29,13 +47,25 @@ const Clients = () => {
     notes: "",
   });
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const clientsPerPage = 15;
+
   useEffect(() => {
     localStorage.setItem("addedClients", JSON.stringify(addedClients));
   }, [addedClients]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    /*
     setClientForm((prev) => ({ ...prev, [name]: value }));
+    */
+
+    setClientForm((prev) => ({
+      ...prev,
+      [name]: name === "phone" ? formatPhoneNumber(value) : value,
+    }));
   };
 
   const handleSave = (id) => {
@@ -81,7 +111,17 @@ const handleRemove = async (id) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!addedClients) return alert("Please provide all information");
+    if (
+      !clientForm.policy ||
+      !clientForm.name ||
+      !clientForm.address ||
+      !clientForm.email ||
+      !clientForm.phone ||
+      !clientForm.insuranceType ||
+      !clientForm.enrollmentDate
+    ) {
+      return alert("Please provide all information");
+    }
 
     const fakeId = Date.now();
     const newClient = {
@@ -105,16 +145,43 @@ const handleRemove = async (id) => {
     setShowForm(false);
   };
 
+  const filteredClients = [...addedClients]
+    .filter((client) =>
+      client.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    .sort((a, b) => {
+      const lastNameA = a.name.trim().split(" ").slice(-1)[0];
+
+      const lastNameB = b.name.trim().split(" ").slice(-1)[0];
+
+      return lastNameA.localeCompare(lastNameB);
+    });
+
+  const totalPages = Math.ceil(filteredClients.length / clientsPerPage);
+
+  const startIndex = (currentPage - 1) * clientsPerPage;
+
+  const paginatedClients = filteredClients.slice(
+    startIndex,
+    startIndex + clientsPerPage,
+  );
+
   return (
     <>
       <div className="clients-page">
         <header className="site-header">
           <div className="logo">
-            <img src="src/assets/ins-logo.png" className="img-logo" />
+            <img
+              src="src/assets/barrera-logo-no-background.png"
+              className="img-logo"
+              alt="image of business logo"
+            />
           </div>
 
           <div className="dashboard-box">
-            <h5 className="dashboard-text">Dashboard</h5>
+            <Link to="/dashboard">
+              <h5 className="dashboard-text">Dashboard</h5>
+            </Link>
           </div>
 
           <div className="logout-box">
@@ -124,6 +191,19 @@ const handleRemove = async (id) => {
         <main>
           <div>
             <h1 className="clients-heading">Clients</h1>
+          </div>
+
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search client..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="search-input"
+            />
           </div>
 
           <section className="content-container">
@@ -156,7 +236,7 @@ const handleRemove = async (id) => {
               </div>
             </div>
             <RenderAddedClients
-              addedClients={addedClients}
+              addedClients={paginatedClients}
               setAddedClients={setAddedClients}
               editingId={editingId}
               handleEdit={handleEdit}
@@ -165,23 +245,60 @@ const handleRemove = async (id) => {
               handleSave={handleSave}
               handleRemove={handleRemove}
             />
+
+            <div className="pagination-container">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                ←
+              </button>
+
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    className={currentPage === page ? "active-page" : ""}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ),
+              )}
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                →
+              </button>
+            </div>
+
             {showForm && (
               <RenderInputs
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}
                 addedClients={addedClients}
+                setShowForm={setShowForm}
+                clientForm={clientForm}
               />
             )}
           </section>
 
           <div className="add-btn-container">
-            <button className="add-btn" onClick={() => setShowForm(true)}>
+            <button
+              className="add-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowForm(true);
+              }}
+            >
               Add Client
             </button>
           </div>
         </main>
 
-        <footer>
+        <footer className="clients-footer">
           <p className="footer-text">
             © 2026 Marci Insurance. All rights reserved.
           </p>
@@ -196,17 +313,35 @@ const RenderInputs = ({
   setAddedClients,
   handleChange,
   addedClients,
+  clientForm,
+  setShowForm,
 }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setShowForm(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [setShowForm]);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form ref={containerRef} onSubmit={handleSubmit}>
         <div className="form-input-container">
           <div className="input-box">
             <input
               id="policy"
               name="policy"
               onChange={handleChange}
-              value={addedClients.policy}
+              value={clientForm.policy}
               className="input-clients-box"
             />
           </div>
@@ -216,7 +351,7 @@ const RenderInputs = ({
               id="name"
               name="name"
               onChange={handleChange}
-              value={addedClients.name}
+              value={clientForm.name}
               className="input-clients-box"
             />
           </div>
@@ -226,7 +361,7 @@ const RenderInputs = ({
               id="address"
               name="address"
               onChange={handleChange}
-              value={addedClients.address}
+              value={clientForm.address}
               className="input-clients-box"
             />
           </div>
@@ -235,7 +370,7 @@ const RenderInputs = ({
               id="email"
               name="email"
               onChange={handleChange}
-              value={addedClients.email}
+              value={clientForm.email}
               className="input-clients-box"
             />
           </div>
@@ -244,7 +379,8 @@ const RenderInputs = ({
               id="phone"
               name="phone"
               onChange={handleChange}
-              value={addedClients.phone}
+              value={clientForm.phone}
+              maxLength={14}
               className="input-clients-box"
             />
           </div>
@@ -253,7 +389,7 @@ const RenderInputs = ({
               id="insuranceType"
               name="insuranceType"
               onChange={handleChange}
-              value={addedClients.insuranceType}
+              value={clientForm.insuranceType}
               className="input-clients-box"
             />
           </div>
@@ -262,7 +398,7 @@ const RenderInputs = ({
               id="enrollmentDate"
               name="enrollmentDate"
               onChange={handleChange}
-              value={addedClients.enrollmentDate}
+              value={clientForm.enrollmentDate}
               className="input-clients-box"
             />
           </div>
@@ -271,7 +407,7 @@ const RenderInputs = ({
               id="notes"
               name="notes"
               onChange={handleChange}
-              value={addedClients.notes}
+              value={clientForm.notes}
               className="input-clients-box"
             />
           </div>
@@ -289,6 +425,7 @@ const RenderInputs = ({
 
 const RenderAddedClients = ({
   addedClients,
+  paginatedClients,
   editingId,
   handleEdit,
   editValues,
@@ -313,7 +450,15 @@ const RenderAddedClients = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    setEditValues((prev) => ({
+      ...prev,
+      [name]: name === "phone" ? formatPhoneNumber(value) : value,
+    }));
+
+    /*
     setEditValues((prev) => ({ ...prev, [name]: value }));
+    */
   };
 
   return (
@@ -399,6 +544,7 @@ const RenderAddedClients = ({
                       name="phone"
                       onChange={handleChange}
                       value={editValues.phone}
+                      maxLength={14}
                       className="input-clients-box"
                     />
                   </div>
