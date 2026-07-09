@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const RenderHeader = () => {
+  useEffect(() => {
+    const btn = document.getElementById("hamburgerBtn");
+    const menu = document.getElementById("mobileNav");
+
+    if (!btn || !menu) return;
+
+    const handleClick = () => {
+      menu.classList.toggle("show");
+    };
+
+    btn.addEventListener("click", handleClick);
+
+    return () => {
+      btn.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   return (
     <header className="site-header">
       <div className="logo">
@@ -25,8 +43,8 @@ const RenderHeader = () => {
           </div>
         </div>
 
-        <a href="#why">Why Us</a>
-        <a href="#contact">Contact</a>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
 
       <div className="contact-info">
@@ -60,8 +78,8 @@ const RenderHeader = () => {
             </div>
           </div>
 
-          <a href="#why">Why Us</a>
-          <a href="#contact">Contact</a>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
       </div>
     </header>

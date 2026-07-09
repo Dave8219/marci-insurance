@@ -1,6 +1,20 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./clients.css";
+
+const mapClientFromAPI = (client) => ({
+  id: client.id,
+  policy: client.policy,
+  name: client.name,
+  address: client.address,
+  email: client.email,
+  phone: client.phone,
+  insuranceType: client.insurance_type,
+  enrollmentDate: client.enrollment_date,
+  notes: client.notes,
+  createdAt: client.created_at,
+});
 
 const formatPhoneNumber = (value) => {
   const phoneNumber = value.replace(/\D/g, "");
@@ -18,6 +32,8 @@ const formatPhoneNumber = (value) => {
     6,
   )}-${phoneNumber.slice(6, 10)}`;
 };
+
+axios.defaults.withCredentials = true;
 
 const Clients = () => {
   const [showForm, setShowForm] = useState(false);
@@ -52,9 +68,48 @@ const Clients = () => {
 
   const clientsPerPage = 15;
 
+  /*
   useEffect(() => {
     localStorage.setItem("addedClients", JSON.stringify(addedClients));
   }, [addedClients]);
+*/
+
+  const API = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchLeads = async () => {
+      try {
+        const response = await axios.get(`${API}/api/v1/clients`, {
+          withCredentials: true,
+        });
+        console.log(response.data);
+
+        setAddedClients(response.data.map(mapClientFromAPI));
+        console.log("Mapped:", response.data.map(mapClientFromAPI));
+      } catch (error) {
+        console.error("Failed to get clients database", error);
+      }
+    };
+    fetchLeads();
+  }, [API]);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${API}/api/v1/auth/logout`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,24 +123,61 @@ const Clients = () => {
     }));
   };
 
-  const handleSave = (id) => {
+  const handleSave = async (id) => {
+    try {
+      const response = await axios.patch(
+        `${API}/api/v1/update-client/${id}`,
+        {
+          withCredentials: true,
+        },
+
+        {
+          policy: editValues.policy,
+          name: editValues.name,
+          address: editValues.address,
+          email: editValues.email,
+          phone: editValues.phone,
+          insurance_type: editValues.insuranceType,
+          enrollment_date: editValues.enrollmentDate,
+          notes: editValues.notes,
+        },
+      );
+
+      setAddedClients((prev) =>
+        prev.map((client) =>
+          client.id === id ? { ...client, ...editValues } : client,
+        ),
+      );
+      /*
+      setEditingId(null);
+      setShowButtons(false);
+      */
+      // setActiveLead(updatedLead);
+    } catch (error) {
+      console.error("Could not update. Please try again.", error);
+    }
+
+    setEditingId(null);
+
+    /*
     setAddedClients((prev) => {
       return prev.map((c) => (c.id === id ? { ...c, ...editValues } : c));
     });
     setEditingId(null);
+    */
   };
 
   const handleEdit = (client) => {
     setEditingId(client.id);
     setEditValues({
-      policy: client.policy,
-      name: client.name,
-      address: client.address,
-      email: client.email,
-      phone: client.phone,
-      insuranceType: client.insuranceType,
-      enrollmentDate: client.enrollmentDate,
-      notes: client.notes,
+      policy: client.policy || "",
+      name: client.name || "",
+      address: client.address || "",
+      email: client.email || "",
+      phone: client.phone || "",
+      insuranceType: client.insuranceType || "",
+      enrollmentDate: client.enrollmentDate || "",
+      notes: client.notes || "",
     });
   };
 
@@ -102,13 +194,26 @@ const handleRemove = async (id) => {
 };
 */
 
-  const handleRemove = (id) => {
+  const handleRemove = async (id) => {
+    try {
+      await axios.delete(`${API}/api/v1/delete-client/${id}`, {
+        withCredentials: true,
+      });
+      setAddedClients((prev) => {
+        return prev.filter((client) => client.id !== id);
+      });
+    } catch (error) {
+      console.error("Could not delete. Please try again.", error);
+    }
+
+    /*
     setAddedClients((prev) => {
       return prev.filter((client) => client.id !== id);
     });
+    */
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -123,6 +228,30 @@ const handleRemove = async (id) => {
       return alert("Please provide all information");
     }
 
+    const payload = {
+      policy: clientForm.policy,
+      name: clientForm.name,
+      address: clientForm.address,
+      email: clientForm.email,
+      phone: clientForm.phone,
+      insurance_type: clientForm.insuranceType,
+      enrollment_date: clientForm.enrollmentDate,
+      notes: clientForm.notes,
+      created_at: new Date().toISOString(),
+    };
+
+    const response = await axios.post(
+      `${API}/api/v1/create-client`,
+      {
+        withCredentials: true,
+      },
+      payload,
+    );
+    console.log("POST RESPONSE", response.data);
+
+    setAddedClients((prev) => [...prev, mapClientFromAPI(response.data)]);
+
+    /*
     const fakeId = Date.now();
     const newClient = {
       id: fakeId,
@@ -131,7 +260,7 @@ const handleRemove = async (id) => {
 
     const updatedClient = [...addedClients, newClient];
     setAddedClients(updatedClient);
-
+*/
     setClientForm({
       policy: "",
       name: "",
@@ -141,6 +270,7 @@ const handleRemove = async (id) => {
       insuranceType: "",
       enrollmentDate: "",
       notes: "",
+      createdAt: "",
     });
     setShowForm(false);
   };
@@ -171,11 +301,13 @@ const handleRemove = async (id) => {
       <div className="clients-page">
         <header className="site-header">
           <div className="logo">
-            <img
-              src="src/assets/barrera-logo-no-background.png"
-              className="img-logo"
-              alt="image of business logo"
-            />
+            <Link to="/dashboard">
+              <img
+                src="src/assets/barrera-logo-no-background.png"
+                className="img-logo"
+                alt="image of business logo"
+              />
+            </Link>
           </div>
 
           <div className="dashboard-box">
@@ -184,7 +316,7 @@ const handleRemove = async (id) => {
             </Link>
           </div>
 
-          <div className="logout-box">
+          <div className="logout-box" onClick={handleLogout}>
             <h5 className="logout-text">Logout</h5>
           </div>
         </header>

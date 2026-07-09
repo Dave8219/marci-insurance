@@ -1,21 +1,53 @@
-.video-player {
-  height: 400px;
-  width: 100vw;
+.health-insurance-page {
+  overflow-x: hidden;
+}
+
+.health-insurance-page .video-player {
+  height: 460px;
+  width: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
-.video-overlay {
+.health-insurance-page .video-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.267);
-  height: 490px;
 }
 
-.hero-overlay {
+.health-insurance-page .hero-overlay {
   position: absolute;
   inset: 0;
-  top: 100px;
+  top: 125px;
+  left: 25px;
+  background-color: #07172c96;
+  height: 300px;
+  width: 550px;
+  padding: 25px;
+  border-radius: 25px;
+
   z-index: 2;
+}
+
+.health-insurance-page .hero-overlay h1 {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.health-insurance-page .hero-overlay p {
+  color: rgb(255, 255, 255);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.health-insurance-page .quote-btn {
+  width: auto;
+  font-size: 1rem;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #002f6c;
+  color: white;
 }
 
 /*
@@ -23,7 +55,7 @@ Section 2
 */
 .coverage-section {
   background: #ffffff;
-  margin-top: 25px;
+  margin-top: 75px;
 }
 
 .coverage-content {
@@ -34,6 +66,7 @@ Section 2
   max-width: 1100px;
   margin: auto;
   flex-wrap: wrap;
+  padding: 0 20px;
 }
 
 .coverage-text {
@@ -47,7 +80,7 @@ Section 2
 }
 
 .coverage-text ul {
-  margin-top: 15px;
+  margin-top: 35px;
   padding-left: 20px;
 }
 
@@ -55,12 +88,30 @@ Section 2
   margin-bottom: 8px;
 }
 
+.coverage-text li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-bottom: 12px;
+}
+
 .coverage-image {
   flex: 1;
   min-width: 300px;
 }
 
-.coverage-image img {
+.health-insurance-page .coverage-image-mobile {
+  display: none;
+}
+
+.health-insurance-page .nurse-heart {
+  width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.health-insurance-page .coverage-image img {
   width: 100%;
   border-radius: 12px;
   object-fit: cover;
@@ -71,6 +122,8 @@ Section 2
 .benefits-section {
   background: #8da5ed;
   text-align: center;
+  padding: 20px;
+  margin-top: 40px;
 }
 
 .benefits-section h2 {
@@ -85,10 +138,12 @@ Section 2
   max-width: 1100px;
   margin: auto;
   padding-bottom: 50px;
+  padding: 0 20px 50px;
 }
 
-.benefit-card {
+.health-insurance-page .benefit-card {
   background: white;
+  border-top: #273f87 solid 5px;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -107,6 +162,7 @@ Section 2
 
 .extras-section {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   gap: 50px;
@@ -115,7 +171,7 @@ Section 2
     inset 0 -1px 0 rgba(0, 0, 0, 0.05);
   margin: auto;
   flex-wrap: wrap;
-  background: linear-gradient(135deg, #f0f3ff, #d8daf5, #b8c4e9);
+  background: linear-gradient(135deg, #f1f2f7, #e5e6f1, #f0f1f5);
   overflow: hidden;
 }
 
@@ -152,6 +208,18 @@ Section 2
   min-width: 300px;
 }
 
+.health-insurance-page .extras-image-mobile {
+  display: none;
+}
+
+.health-insurance-page .relax-outdoors-mobile {
+  display: none;
+}
+
+.health-insurance-page .extras-sub {
+  max-width: 500px;
+}
+
 .extras-content h2 {
   font-size: 2rem;
   margin-bottom: 15px;
@@ -159,6 +227,10 @@ Section 2
 
 .extras-list > div {
   margin-bottom: 15px;
+}
+
+.health-insurance-page .extras-list li {
+  list-style: disc;
 }
 
 .relax-outdoors {
@@ -180,7 +252,8 @@ Section 2
 .marketplace-content {
   max-width: 800px;
   margin: auto;
-  padding: 50px;
+
+  padding: 50px 20px;
 }
 
 .marketplace-content h2 {
@@ -242,4 +315,328 @@ Section 2
   width: 200px;
   object-fit: contain;
   padding: 15px;
+}
+
+/* ===========================
+   TABLETS
+=========================== */
+
+@media (max-width: 992px) {
+  .coverage-content,
+  .extras-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .coverage-text,
+  .extras-content {
+    width: 100%;
+  }
+
+  .coverage-text ul {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .coverage-image,
+  .extras-image {
+    width: 100%;
+    max-width: 650px;
+  }
+
+  .relax-outdoors {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .marketplace-content {
+    padding: 40px 30px;
+  }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 768px) {
+  .health-insurance-page .video-player {
+    height: 350px;
+  }
+
+  .health-insurance-page .hero-overlay {
+    width: calc(70% - 30px);
+    height: 280px;
+
+    left: 15px;
+    right: 15px;
+    top: 175px;
+
+    padding: 20px;
+  }
+
+  .health-insurance-page .hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+
+  .health-insurance-page .hero-overlay p {
+    font-size: 1rem;
+
+    width: min(90%, 420px);
+    padding-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .quote-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Sections */
+
+  .coverage-section,
+  .benefits-section,
+  .extras-section,
+  .marketplace-section,
+  .health-cta {
+    padding: 10px 20px;
+  }
+
+  .health-cta {
+    padding: 40px 20px;
+  }
+
+  .coverage-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .health-insurance-page .health-ins-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+  }
+
+  .health-insurance-page .coverage-image {
+    display: none;
+  }
+
+  .health-insurance-page .coverage-image-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .health-insurance-page .nurse-heart-mobile {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .coverage-text h2,
+  .benefits-section h2,
+  .extras-content h2,
+  .marketplace-content h2,
+  .health-cta h2 {
+    font-size: 1.8rem;
+  }
+
+  .coverage-text {
+    text-align: center;
+  }
+
+  .coverage-text ul {
+    padding-left: 0;
+  }
+
+  .coverage-text li {
+    justify-content: start;
+  }
+
+  .coverage-image img {
+    width: 100%;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefit-card {
+    padding: 20px;
+  }
+
+  .extras-image {
+    width: 100%;
+    max-width: 550px;
+  }
+
+  .health-insurance-page .relax-outdoors-mobile {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .extras-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    place-items: center;
+  }
+
+  .health-insurance-page .extras-list li {
+    list-style: none;
+  }
+
+  .health-insurance-page .extras-list {
+    padding-left: 0;
+  }
+
+  .health-insurance-page .extras-list ul {
+    align-items: center;
+    list-style-type: none;
+  }
+
+  .marketplace-content {
+    padding: 20px;
+  }
+
+  .marketplace-btn,
+  .cta-btn {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  .health-insurance-page .extras-image-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .extras-image img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .health-insurance-page .extras-image {
+    display: none;
+  }
+}
+
+/* ===========================
+   SMALL PHONES
+=========================== */
+
+@media (max-width: 480px) {
+  .health-insurance-page .video-player {
+    height: 300px;
+    width: 100%;
+  }
+
+  .health-insurance-page .hero-overlay {
+    top: 175px;
+    padding: 15px;
+    height: 200px;
+    background-color: #07172c96;
+  }
+
+  .health-insurance-page .hero-overlay h1 {
+    font-size: 1.2rem;
+  }
+
+  .health-insurance-page .hero-overlay p {
+    font-size: 0.92rem;
+  }
+
+  .coverage-text,
+  .coverage-image,
+  .extras-image,
+  .extras-content {
+    min-width: 0;
+  }
+
+  .extras-list ul {
+    align-items: center;
+    list-style-type: none;
+  }
+
+  .health-insurance-page .extras-list li {
+    list-style: none;
+  }
+
+  .health-insurance-page .extras-list {
+    padding-left: 0;
+  }
+
+  .health-insurance-page .health-ins-services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: fit-content;
+    row-gap: 10px;
+    column-gap: 18px;
+    justify-content: space-evenly;
+  }
+
+  .health-insurance-page .coverage-text p {
+    text-align: start;
+  }
+
+  .extras-section::before {
+    display: none;
+  }
+
+  .coverage-text h2,
+  .benefits-section h2,
+  .extras-content h2,
+  .marketplace-content h2,
+  .health-cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .benefit-card {
+    padding: 18px;
+  }
+
+  .health-insurance-page .relax-outdoors-mobile {
+    max-width: 280px;
+  }
+
+  .marketplace-content {
+    padding: 15px;
+  }
+
+  .health-insurance-page .quote-btn {
+    width: auto;
+    margin-left: 20px;
+    margin-top: 0px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .health-insurance-page .coverage-image {
+    display: none;
+  }
+
+  .health-insurance-page .coverage-image-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .health-insurance-page .nurse-heart-mobile {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
 }

@@ -2,8 +2,10 @@ require("dotenv").config();
 // require('express-async-errors');
 const helmet = require("helmet");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const { pool } = require("./db/connect.js");
 
-const { pool } = require("./db.js");
+const authRouter = require("./routes/auth.js");
 
 const leads = require("./routes/leads.js");
 const clients = require("./routes/clients.js");
@@ -13,11 +15,19 @@ const rateLimiter = require("express-rate-limit");
 const express = require("express");
 const app = express();
 
-app.use(helmet());
-app.use(cors());
-
 app.use(express.json());
 
+app.use(cookieParser());
+
+app.use(helmet());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
+
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", leads);
 app.use("/api/v1", clients);
 

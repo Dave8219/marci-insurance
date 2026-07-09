@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
@@ -12,7 +13,10 @@ import Clients from "./Clients.jsx";
 import HealthInsurance from "./HealthInsurance.jsx";
 import LifeInsurance from "./LifeInsurance.jsx";
 import Medicare from "./Medicare.jsx";
-
+import About from "./About.jsx";
+import Contact from "./Contact.jsx";
+import CreateAccount from "./CreateAccount.jsx";
+import ResetPassword from "./ResetPassword.jsx";
 function App() {
   // const [count, setCount] = useState(0)
   /*
@@ -136,12 +140,19 @@ function App() {
   // <HealthInsurance />
   return (
     <>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/clients" element={<Clients />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/health-insurance" element={<HealthInsurance />} />
         <Route path="/medicare" element={<Medicare />} />
         <Route path="/life-insurance" element={<LifeInsurance />} />

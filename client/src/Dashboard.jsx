@@ -1,20 +1,43 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./dashboard.css";
 
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const API = import.meta.env.VITE_API_BASE_URL;
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${API}/api/v1/auth/logout`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <>
       <div className="dashboard-page">
         <header className="site-header">
           <div className="logo">
-            <Link to="/">
+            <Link to="/dashboard">
               <img
                 src="src/assets/barrera-logo-no-background.png"
                 className="img-logo"
               />
             </Link>
+          </div>
+          <div className="logout-box" onClick={handleLogout}>
+            <h5 className="logout-text">Logout</h5>
           </div>
         </header>
         <main>

@@ -17,6 +17,10 @@ body {
   font-size: 1rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 p {
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
@@ -47,7 +51,7 @@ li {
   color: black;
 }
 
-.hero-image-box {
+.home-page .hero-image-box {
   position: relative;
   overflow-x: hidden;
   width: 100%;
@@ -65,7 +69,7 @@ li {
   background-color: #f2eddb6b;
 }
 
-.hero-image {
+.home-page .hero-image {
   width: 100%;
   object-fit: cover;
   height: 515px;
@@ -124,7 +128,7 @@ footer {
   max-width: 1100px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
 
@@ -134,6 +138,21 @@ footer {
   opacity: 0.7;
 }
 
+.nav-links-footer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+
+.footer-tabs {
+  color: white;
+  text-decoration: none;
+}
+
+.drop-btn-footer {
+  color: white;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -141,6 +160,7 @@ footer {
   height: 90px;
   display: flex;
   flex-direction: row;
+  border-bottom: solid 1px gold;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -155,12 +175,15 @@ footer {
   display: flex;
   flex: 1;
   margin-top: 8px;
+  overflow: hidden;
 }
 
 .img-logo {
   width: 185px;
-  height: 150px;
-  padding: 4px;
+  height: 120px;
+  object-fit: contain;
+  overflow: hidden;
+  border: none;
 }
 
 .nav-links {
@@ -202,7 +225,7 @@ footer {
   font-family: "Roboto", sans-serif;
 }
 
-.hero-text {
+.home-page .hero-text {
   text-align: start;
   padding: 10px 8px;
   margin-left: 20px;
@@ -344,7 +367,7 @@ i {
   flex-wrap: wrap;
 }
 
-.primary-btn {
+.hero-buttons .primary-btn {
   font-size: 1rem;
   background-color: #252d70;
   color: white;
@@ -353,7 +376,7 @@ i {
   border-radius: 4px;
 }
 
-.secondary-btn {
+.hero-buttons .secondary-btn {
   font-size: 1rem;
   background-color: #252d70;
   color: white;
@@ -379,6 +402,7 @@ input {
   border: none;
   border-radius: 4px;
   color: white;
+  cursor: pointer;
 }
 
 .services-section {
@@ -587,8 +611,8 @@ body {
     width: 28px;
   }
 
-  .hero-text h1 {
-    font-size: 28px;
+  .home-page .hero-text h1 {
+    font-size: 34px;
   }
 }
 
@@ -626,7 +650,7 @@ body {
     flex-direction: row;
     height: auto;
     gap: 12px;
-    padding: 15px;
+    padding: 15px 10px 15px 0px;
   }
 
   .logo,
@@ -636,8 +660,9 @@ body {
   }
 
   .img-logo {
-    width: 140px;
-    height: auto;
+    width: 163px;
+    height: 120px;
+    object-fit: contain;
   }
 
   .nav-links {
@@ -688,9 +713,35 @@ body {
   .hero-content,
   .why-content,
   .services-grid,
-  .testimonials-grid,
-  .footer-grid {
+  .testimonials-grid {
     grid-template-columns: 1fr;
+  }
+
+  .health-services .ul-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-page .ul-grid li h2 {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+    font-size: 1.2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-links-footer {
+    display: flex;
+    padding-left: 50%;
+    align-items: start;
+  }
+
+  .dropdown-content {
+    min-width: 175px;
   }
 
   .hero-content-grid {
@@ -698,24 +749,44 @@ body {
     grid-template-columns: 1fr;
     gap: 50px;
     align-items: center;
+    text-align: center;
+    place-items: center;
   }
 
-  .hero-text h1 {
+  .home-page .hero-text-h1 {
     font-size: 36px;
+  }
+
+  .home-page .img-logo {
+    width: 185px;
+    height: 120px;
+    object-fit: contain;
+    overflow: hidden;
+    border: none;
+  }
+
+  .footer-para {
+    max-width: 330px;
   }
 }
 
-.hero-text-h1 {
+.home-page .hero-text-h1 {
   color: black;
+  font-size: 2.5rem;
 }
 
 /* Small Phones */
 @media (max-width: 480px) {
-  .site-header {
+  .home-page .site-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 15px;
+    padding: 10px 0px;
+  }
+
+  .hero-page .hero-text-h1 {
+    color: black;
+    font-size: 1rem;
   }
 
   /* Hide desktop nav */
@@ -739,7 +810,7 @@ body {
   }
 
   .phone-number-nav {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
   }
 
   /* Show mobile menu */
@@ -794,6 +865,19 @@ body {
 
   .mobile-nav.show {
     display: flex;
+  }
+
+  .home-page .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .why-content {
+    grid-template-columns: 1fr;
+  }
+
+  .dropdown-content {
+    min-width: 150px;
+    left: -75px;
   }
 }
 

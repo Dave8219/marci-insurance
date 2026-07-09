@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const authenticateUser = require("../middleware/authMiddleware.js");
 
 const {
   getAllClients,
@@ -8,6 +9,8 @@ const {
   updateClient,
   updateClientNote,
 } = require("../controllers/clients.js");
+
+router.use(authenticateUser);
 
 router.route("/clients").get(getAllClients);
 router.route("/create-client").post(createClient);

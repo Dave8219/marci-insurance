@@ -1,4 +1,4 @@
-const { pool } = require("../db.js");
+const { pool } = require("../db/connect.js");
 
 // user logs in to see all clients
 const getAllClients = async (req, res) => {
@@ -13,12 +13,29 @@ const getAllClients = async (req, res) => {
 // client creates client info in the form
 const createClient = async (req, res) => {
   try {
-    const { application, name, email, phone, insurance_type, enrollment_date } =
-      req.body;
+    const {
+      policy,
+      name,
+      address,
+      email,
+      phone,
+      insurance_type,
+      enrollment_date,
+      notes,
+    } = req.body;
 
     const [result] = await pool.execute(
-      `INSERT INTO clients (application, name, email, phone, insurance_type, enrollment_date) VALUES (?, ?, ?, ?, ?, ?)`,
-      [application, name, email, phone, insurance_type, enrollment_date],
+      `INSERT INTO clients (policy, name, address, email, phone, insurance_type, enrollment_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        policy,
+        name,
+        address,
+        email,
+        phone,
+        insurance_type,
+        enrollment_date,
+        notes,
+      ],
     );
     const [newClient] = await pool.query(`SELECT * FROM clients WHERE id = ?`, [
       result.insertId,
@@ -26,6 +43,7 @@ const createClient = async (req, res) => {
     res.status(201).json(newClient[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
+    console.log(err.message);
   }
 };
 
@@ -49,23 +67,33 @@ const deleteClient = async (req, res) => {
 
 const updateClient = async (req, res) => {
   try {
-    const { application, name, email, phone, insurance_type, enrollment_date } =
-      req.body;
+    const {
+      policy,
+      name,
+      address,
+      email,
+      phone,
+      insurance_type,
+      enrollment_date,
+      notes,
+    } = req.body;
 
-    const update = await pool.execute(
-      `UPDATE clients SET application = ?, name = ?, email = ?, phone = ?, insurance_type = ?, enrollment_date = ? WHERE id = ?`,
+    const result = await pool.execute(
+      `UPDATE clients SET policy = ?, name = ?, address = ?, email = ?, phone = ?, insurance_type = ?, enrollment_date = ?, notes = ? WHERE id = ?`,
       [
-        application,
+        policy,
         name,
+        address,
         email,
         phone,
         insurance_type,
         enrollment_date,
+        notes,
         req.params.id,
       ],
     );
 
-    if (update.affectedRows === 0) {
+    if (result.affectedRows === 0) {
       return res.status(404).json({ message: "update not successful" });
     }
     return res.status(200).json({ message: "client updated successfully" });

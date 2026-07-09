@@ -1,0 +1,160 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { pool } = require("../db/connect.js");
+
+const login = async (req, res) => {
+  const { username, password } = req.body;
+
+  const [user] = await pool.query("SELECT * FROM users WHERE username = ?", [
+    username,
+  ]);
+
+  if (user.length === 0) {
+    return res.status(401).json({
+      message: "Invalid credentials",
+    });
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user[0].password);
+
+  if (!isPasswordCorrect) {
+    return res.status(401).json({
+      message: "Invalid credentials",
+    });
+  }
+
+  // CREATE JWT HERE
+  const token = jwt.sign(
+    {
+      id: user[0].id,
+      username: user[0].username,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRE,
+    },
+  );
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: false, // change to true when deployed HTTPS
+    sameSite: "lax",
+  });
+
+  // use later when deployed on https
+  /*
+secure: true,
+sameSite: "none",
+*/
+
+  res.status(200).json({
+    message: "Login successful",
+  });
+};
+
+const createAccount = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        message: "Please provide a username, email, and password.",
+      });
+    }
+
+    // Check if username or email already exists
+    const [existingUser] = await pool.execute(
+      `SELECT id FROM users WHERE username = ? OR email = ?`,
+      [username, email],
+    );
+
+    if (existingUser.length > 0) {
+      return res.status(409).json({
+        message: "Username or email already exists.",
+      });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert user
+    const [result] = await pool.execute(
+      `INSERT INTO users (username, email, password)
+       VALUES (?, ?, ?)`,
+      [username, email, hashedPassword],
+    );
+
+    // Return the new user (without password)
+    const [newUser] = await pool.execute(
+      `SELECT id, username, email, created_at
+       FROM users
+       WHERE id = ?`,
+      [result.insertId],
+    );
+
+    res.status(201).json({
+      msg: "Account created successfully!",
+      user: newUser[0],
+    });
+  } catch (err) {
+    console.error("CREATE ACCOUNT ERROR:", err);
+
+    res.status(500).json({
+      message: err.message,
+      sqlMessage: err.sqlMessage,
+    });
+  }
+};
+
+const logout = async (req, res) => {
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0),
+    secure: false, // change to true when deployed with HTTPS
+    sameSite: "lax",
+  });
+
+  res.status(200).json({
+    message: "Logout successful",
+  });
+};
+
+
+const forgotUsername = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const [user] = await pool.query(
+      "SELECT username FROM users WHERE email = ?",
+      [email],
+    );
+
+    if (user.length === 0) {
+      return res.status(404).json({
+        message: "No account found with this email",
+      });
+    }
+
+    await sendEmail({
+      to: email,
+      subject: "Username Recovery",
+      text: `Your username is: ${user[0].username}`,
+    });
+
+    res.status(200).json({
+      message: "Username has been emailed",
+    });
+  } catch (error) {
+    console.error("FORGOT USERNAME ERROR:", error);
+
+    res.status(500).json({
+      message: "Could not recover username",
+    });
+  }
+};
+
+
+
+
+
+module.exports = { login, createAccount, logout, forgotUsername,  };

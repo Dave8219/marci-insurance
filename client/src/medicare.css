@@ -1,3 +1,905 @@
-.medicare-heading {
+.medicare-page {
+  --primary-blue: #003c8f;
+  --secondary-blue: #0f5db8;
+  --gold: #d9b12c;
+  --light-gold: #f4e6a5;
+  --light-bg: #f7f9fc;
+  --dark-text: #243043;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.medicare-page p {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.medicare-page li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.medicare-page li p,
+.medicare-page li span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* HERO */
+
+.hero-image-mobile {
+  display: none;
+}
+
+.medicare-page .medicare-hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+
+  padding: 80px 8%;
+  flex-wrap: wrap;
+
+  background: linear-gradient(135deg, #f7f9fc, white);
+}
+
+.medicare-page .hero-content {
+  flex: 1;
+  min-width: 350px;
+}
+
+.medicare-page .hero-badge {
+  background: var(--light-gold);
+  color: var(--primary-blue);
+
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.medicare-page .hero-content h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin: 20px 0;
   color: black;
+}
+
+.medicare-page .hero-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* BUTTONS */
+
+.medicare-page .hero-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.medicare-page .hero-buttons .schedule-btn {
+  border: none;
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 40px;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  background: var(--primary-blue);
+  color: white;
+
+  transition: 0.3s;
+}
+
+.medicare-page .hero-buttons .schedule-btn:hover {
+  transform: translateY(-3px);
+}
+
+.medicare-page .hero-buttons .learn-btn {
+  /*
+  background: var(--gold) !important;
+  color: var(--primary-blue) !important;
+  */
+  border: none;
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 40px;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #243043;
+}
+
+/* IMAGE AREA */
+
+.medicare-page .hero-image-container {
+  position: relative;
+}
+
+.medicare-page .hero-image {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+
+  animation:
+    float 5s ease-in-out infinite,
+    morph 10s ease-in-out infinite;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.medicare-page .floating-card {
+  position: absolute;
+
+  bottom: 40px;
+  left: -40px;
+
+  background: white;
+  padding: 18px 25px;
+
+  border-radius: 15px;
+
+  font-weight: bold;
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* BENEFITS */
+
+.medicare-page .benefits-section {
+  padding: 120px 8%;
+  background: var(--light-bg);
+  background-color: #a2c4f5;
+  text-align: center;
+}
+
+.medicare-page .benefits-section h2 {
+  font-size: 3rem;
+}
+
+.medicare-page .benefits-grid {
+  margin-top: 60px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 30px;
+}
+
+.medicare-page .benefit-card {
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 25px;
+
+  border-top: 6px solid var(--gold);
+
+  transition: 0.4s;
+}
+
+.medicare-page .benefit-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* WHY US */
+
+.medicare-page .why-us {
+  padding: 0px 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 80px;
+
+  flex-wrap: wrap;
+}
+
+.medicare-page .why-image {
+  max-width: 500px;
+  height: 450px;
+
+  object-fit: cover;
+
+  border-radius: 40px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.medicare-page .why-image-container {
+  height: 500px;
+}
+
+.medicare-page .why-content {
+  flex: 1;
+}
+
+.medicare-page .why-content h2 {
+  font-size: 3rem;
+}
+
+.medicare-page .why-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  font-weight: 500;
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: start;
+}
+
+.medicare-page .why-content li {
+  margin: 20px 0;
+}
+
+.medicare-page ul li {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  gap: 10px; /* space between icon and text */
+}
+
+.schedule-btn {
+  font-size: 1rem;
+  background-color: #002f6c;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.medicare-page .icon-stethescope {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.blue-check {
+  color: #3498db;
+  font-size: 1.4rem;
+}
+
+/* CTA */
+
+.medicare-page .cta-section {
+  padding: 120px 8%;
+
+  text-align: center;
+
+  background: #1e3a8a;
+  /*
+  linear-gradient(
+    135deg,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+*/
+  color: white;
+}
+
+.medicare-page .cta-section h2 {
+  font-size: 3rem;
+}
+
+.medicare-page .cta-section p {
+  max-width: 700px;
+  margin: auto;
+}
+
+.medicare-page .cta-section button {
+  margin-top: 30px;
+
+  border: none;
+
+  padding: 18px 35px;
+
+  border-radius: 40px;
+
+  background: white;
+
+  color: #1e3a8a;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.medicare-page .hidden-section {
+  opacity: 0;
+  transform: translateY(75px);
+  transition: all 1s ease;
+}
+
+.medicare-page .show-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.medicare-page .old-couple-bikes {
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 60, 143, 0.4);
+
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 60, 143, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(217, 177, 44, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(0, 60, 143, 0.3);
+  }
+}
+
+.medicare-page .turning-65 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 75px;
+  padding: 100px 8%;
+  /*
+  background: #fff8dc;
+  */
+  background: #ffefaf;
+  border-radius: 30px;
+
+  margin: 80px auto;
+  max-width: 1200px;
+}
+
+.medicare-page .turning-icon {
+  font-size: 7rem;
+}
+
+.medicare-page .turning-icon-mobile {
+  display: none;
+}
+
+.medicare-page .parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 18px;
+}
+
+.medicare-page .parts-section {
+  padding: 25px;
+}
+
+.medicare-page .parts-section h2 {
+  text-align: center;
+}
+
+.medicare-page .medicare-info h2 {
+  text-align: center;
+}
+
+.medicare-page .info-content {
+  padding: 50px;
+}
+
+.medicare-page .faq-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  padding: 0 8%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.medicare-page .faq-section > * {
+  min-width: 0;
+}
+
+.medicare-page .faq-section h2 {
+  text-align: start;
+  margin: 0 auto;
+}
+
+.medicare-page .faq-section details {
+  text-align: start;
+  margin: 0 auto;
+}
+
+.medicare-page .elderly-couple-bench {
+  border-radius: 12px;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+}
+
+.medicare-page .elderly-couple-bench,
+.medicare-page img {
+  max-width: 575px;
+  height: auto;
+  display: block;
+}
+
+.medicare-page .turning-content p {
+  padding-right: 50px;
+  text-align: start;
+}
+
+.medicare-page .part-card {
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 25px;
+
+  text-align: center;
+
+  transition: 0.4s;
+
+  border: 1px solid black;
+}
+
+.medicare-page .part-card:hover {
+  transform: translateY(-10px);
+}
+
+.medicare-page details {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: white;
+
+  padding: 25px;
+
+  margin: 20px auto;
+
+  border-radius: 15px;
+
+  cursor: pointer;
+}
+
+.medicare-page summary {
+  font-weight: bold;
+}
+
+.medicare-page .faq-section {
+  margin-top: 50px;
+}
+
+/* ANIMATIONS */
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  }
+
+  50% {
+    border-radius: 40% 60% 35% 65% / 60% 35% 65% 40%;
+  }
+
+  100% {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* HERO */
+
+  .medicare-page .benefits-grid {
+    margin-top: 60px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 30px;
+  }
+
+  .medicare-page .parts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .medicare-page .medicare-hero {
+    gap: 50px;
+    padding: 70px 5%;
+    align-items: center;
+  }
+
+  .medicare-page .hero-content {
+    min-width: 300px;
+  }
+
+  .medicare-page .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .medicare-page .hero-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .medicare-page .hero-image {
+    max-width: 420px;
+    height: auto;
+  }
+
+  .medicare-page .floating-card {
+    left: -20px;
+    bottom: 20px;
+    padding: 14px 18px;
+  }
+
+  /* WHY US */
+  .medicare-page .why-us {
+    gap: 50px;
+    align-items: start;
+  }
+
+  .medicare-page .why-image {
+    max-width: 520px;
+    height: 375px;
+    object-fit: cover;
+    margin-bottom: 700px;
+  }
+
+  .medicare-page .why-content h2 {
+    font-size: 2.4rem;
+  }
+
+  /* TURNING 65 */
+  .medicare-page .turning-65 {
+    gap: 40px;
+    padding: 70px 5%;
+  }
+
+  .medicare-page .old-couple-bikes {
+    max-width: 400px;
+  }
+
+  .medicare-page .turning-content p {
+    padding-right: 0;
+  }
+
+  /* FAQ */
+  .medicare-page .faq-section {
+    gap: 40px;
+  }
+
+  .medicare-page .elderly-couple-bench {
+    max-width: 450px;
+  }
+
+  /* HEADINGS */
+  .medicare-page .benefits-section h2,
+  .medicare-page .why-content h2,
+  .medicare-page .cta-section h2 {
+    font-size: 2.4rem;
+  }
+}
+
+/*
+@media (max-width: 992px) {
+  .medicare-page .medicare-hero {
+    gap: 40px;
+    padding: 60px 5%;
+    text-align: center;
+  }
+
+  .medicare-page .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .medicare-page .hero-image {
+    width: 420px;
+    height: 460px;
+  }
+
+  .medicare-page .why-us {
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+  }
+
+  .medicare-page .why-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+  }
+
+  .medicare-page .turning-65 {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 60px 5%;
+  }
+
+  .medicare-page .turning-content p {
+    padding-right: 0;
+  }
+
+  .medicare-page .faq-section {
+    grid-template-columns: 1fr;
+  }
+
+  .medicare-page .faq-section h2 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .medicare-page .faq-section details {
+    margin-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+}
+*/
+
+@media (max-width: 768px) {
+  .medicare-page .why-image-container {
+    place-items: center;
+  }
+
+  .medicare-page .medicare-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .medicare-page .hero-image-container {
+    display: none;
+  }
+
+  .medicare-page .hero-image-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .medicare-page .hero-image-mobile .hero-image {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+
+  .medicare-page .hero-image-container {
+    order: 2;
+  }
+
+  .medicare-page .hero-content {
+    order: 1;
+  }
+
+  .medicare-page .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .medicare-page .hero-buttons a,
+  .medicare-page .hero-buttons button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .medicare-page .hero-image {
+    width: 350px;
+    height: 400px;
+  }
+
+  .medicare-page .benefits-grid {
+    margin-top: 60px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 30px;
+  }
+
+  /* Hide desktop image */
+  .medicare-page .turning-icon {
+    display: none;
+  }
+
+  /* Show mobile image */
+  .medicare-page .turning-icon-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+  }
+
+  .medicare-page .turning-icon-mobile .old-couple-bikes {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .medicare-page .faq-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .medicare-page .faq-section h2 {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .medicare-page details {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .medicare-page summary {
+    word-break: break-word;
+  }
+
+  .medicare-page details p {
+    word-break: break-word;
+  }
+
+  .medicare-page .elderly-couple-bench-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .medicare-page .cta-section {
+    margin-top: 50px;
+  }
+
+  .medicare-page .why-us {
+    flex-direction: column;
+  }
+
+  .medicare-page .turning-65 {
+    flex-direction: column;
+  }
+
+  .medicare-page .faq-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small Phones */
+
+@media (max-width: 480px) {
+  .medicare-page .icon-stethescope {
+    width: 125px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .medicare-page .why-image {
+    object-position: 80% 20%;
+  }
+
+  .medicare-page .old-couple-bikes {
+    max-width: 375px;
+  }
+
+  .medicare-page .elderly-couple-bench {
+    max-width: 350px;
+    margin-bottom: 10px;
+  }
+
+  .medicare-page .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .medicare-page .hero-buttons a,
+  .medicare-page .hero-buttons button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .medicare-page .hero-buttons .schedule-btn {
+    font-size: 0.95rem;
+  }
+
+  .medicare-page .hero-buttons .learn-btn {
+    font-size: 0.95rem;
+  }
+
+  .medicare-page .why-content {
+    margin-top: 0px;
+  }
+
+  .medicare-page .turning-icon-mobile .old-couple-bikes {
+    max-width: 320px;
+  }
+
+  .medicare-page .faq-section h2 {
+    margin-left: 0;
+    text-align: start;
+  }
+
+  .medicare-page .faq-section details {
+    margin-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .medicare-page .faq-section {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .medicare-page details p {
+    word-break: break-word;
+  }
+
+  .medicare-page details {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .medicare-page .hero-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .medicare-page .hero-content p {
+    font-size: 0.93rem;
+  }
+
+  .medicare-page .hero-badge {
+    font-size: 0.8rem;
+  }
+
+  .medicare-page .benefits-section h2,
+  .medicare-page .why-content h2,
+  .medicare-page .cta-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .medicare-page .benefit-card {
+    padding: 20px;
+  }
+
+  .medicare-page .part-card {
+    padding: 20px;
+  }
+
+  .medicare-page .turning-65 {
+    padding: 30px 20px;
+    text-align: start;
+    margin-top: 10px;
+  }
+
+  .medicare-page .floating-card {
+    font-size: 0.85rem;
+  }
+
+  .medicare-page .faq-section {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
 }
