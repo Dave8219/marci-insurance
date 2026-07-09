@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
+const crypto = require("crypto");
+
 const { pool } = require("../db/connect.js");
 
 const login = async (req, res) => {
@@ -154,7 +157,69 @@ const forgotUsername = async (req, res) => {
 };
 
 
+const forgotPassword = async (req, res) => {
+
+  const { email } = req.body;
+
+
+  try {
+
+    const [user] = await pool.query(
+      "SELECT id FROM users WHERE email = ?",
+      [email]
+    );
+
+
+    if (user.length === 0) {
+      return res.status(404).json({
+        message: "No account found with this email",
+      });
+    }
+
+
+    const resetToken = crypto
+      .randomBytes(32)
+      .toString("hex");
+
+
+    await pool.execute(
+      "UPDATE users SET reset_token = ?, reset_token_expire = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE id = ?",
+      [
+        resetToken,
+        user[0].id
+      ]
+    );
+
+
+    const resetURL =
+      `http://localhost:5173/reset-password?token=${resetToken}`;
+
+
+    await sendEmail({
+      to: email,
+      subject: "Password Reset",
+      text:
+      `Click this link to reset your password: ${resetURL}`,
+    });
+
+
+    res.status(200).json({
+      message: "Password reset link sent",
+    });
+
+
+  } catch(error){
+
+    console.error("FORGOT PASSWORD ERROR:", error);
+
+    res.status(500).json({
+      message:"Could not send reset email"
+    });
+
+  }
+
+};
 
 
 
-module.exports = { login, createAccount, logout, forgotUsername,  };
+module.exports = { login, createAccount, logout, forgotUsername, forgotPassword };
