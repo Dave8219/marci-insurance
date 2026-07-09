@@ -122,7 +122,6 @@ const logout = async (req, res) => {
   });
 };
 
-
 const forgotUsername = async (req, res) => {
   const { email } = req.body;
 
@@ -156,70 +155,131 @@ const forgotUsername = async (req, res) => {
   }
 };
 
-
 const forgotPassword = async (req, res) => {
-
   const { email } = req.body;
 
-
   try {
-
-    const [user] = await pool.query(
-      "SELECT id FROM users WHERE email = ?",
-      [email]
-    );
-
+    const [user] = await pool.query("SELECT id FROM users WHERE email = ?", [
+      email,
+    ]);
 
     if (user.length === 0) {
       return res.status(404).json({
-        message: "No account found with this email",
+        message: "If an account exists, a recovery email has been sent.",
       });
     }
 
-
-    const resetToken = crypto
-      .randomBytes(32)
-      .toString("hex");
-
+    const resetToken = crypto.randomBytes(32).toString("hex");
 
     await pool.execute(
       "UPDATE users SET reset_token = ?, reset_token_expire = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE id = ?",
-      [
-        resetToken,
-        user[0].id
-      ]
+      [resetToken, user[0].id],
     );
 
-
-    const resetURL =
-      `http://localhost:5173/reset-password?token=${resetToken}`;
-
+    const resetURL = `http://localhost:5173/reset-password?token=${resetToken}`;
 
     await sendEmail({
       to: email,
       subject: "Password Reset",
-      text:
-      `Click this link to reset your password: ${resetURL}`,
+      text: `Click this link to reset your password: ${resetURL}`,
     });
-
 
     res.status(200).json({
       message: "Password reset link sent",
     });
-
-
-  } catch(error){
-
+  } catch (error) {
     console.error("FORGOT PASSWORD ERROR:", error);
 
     res.status(500).json({
-      message:"Could not send reset email"
+      message: "Could not send reset email",
     });
-
   }
-
 };
 
+const verifyResetToken = async (req, res) => {
+  const { token } = req.params;
 
+  try {
+    const [user] = await pool.query(
+      `
+      SELECT id 
+      FROM users 
+      WHERE reset_token = ?
+      AND reset_token_expire > NOW()
+      `,
+      [token],
+    );
 
-module.exports = { login, createAccount, logout, forgotUsername, forgotPassword };
+    if (user.length === 0) {
+      return res.status(400).json({
+        message: "Invalid or expired token",
+      });
+    }
+
+    res.status(200).json({
+      message: "Token valid",
+    });
+  } catch (error) {
+    console.error("VERIFY RESET TOKEN ERROR:", error);
+
+    res.status(500).json({
+      message: "Could not verify token",
+    });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const [user] = await pool.query(
+      `
+      SELECT id 
+      FROM users
+      WHERE reset_token = ?
+      AND reset_token_expire > NOW()
+      `,
+      [token],
+    );
+
+    if (user.length === 0) {
+      return res.status(400).json({
+        message: "Invalid or expired token",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await pool.execute(
+      `
+      UPDATE users
+      SET password = ?,
+          reset_token = NULL,
+          reset_token_expire = NULL
+      WHERE id = ?
+      `,
+      [hashedPassword, user[0].id],
+    );
+
+    res.status(200).json({
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    console.error("RESET PASSWORD ERROR:", error);
+
+    res.status(500).json({
+      message: "Could not reset password",
+    });
+  }
+};
+
+module.exports = {
+  login,
+  createAccount,
+  logout,
+  forgotUsername,
+  forgotPassword,
+  verifyResetToken,
+  resetPassword,
+};
