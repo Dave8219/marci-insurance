@@ -173,7 +173,7 @@ const Contact = () => {
 
           <div className="card">
             <h3>Office</h3>
-            <p>Rio Grande Valley, TX</p>
+            <p>McAllen, TX</p>
           </div>
         </section>
 

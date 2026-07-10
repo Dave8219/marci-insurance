@@ -65,6 +65,15 @@ const createAccount = async (req, res) => {
       });
     }
 
+    // Limit to 2 admin accounts
+    const [users] = await pool.query("SELECT COUNT(*) AS total FROM users");
+    // "Account creation has been disabled"
+    if (users[0].total >= 2) {
+      return res.status(403).json({
+        message: "Unable to create account. Please contact the administrator.",
+      });
+    }
+
     // Check if username or email already exists
     const [existingUser] = await pool.execute(
       `SELECT id FROM users WHERE username = ? OR email = ?`,

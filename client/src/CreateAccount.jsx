@@ -30,7 +30,7 @@ const CreateAccount = () => {
     } catch (error) {
       console.error("Error response:", error.response);
       setMessage(
-        error.response?.data?.msg ||
+        error.response?.data?.message ||
           error.message ||
           "Something went wrong. Please try again",
       );
@@ -77,7 +77,7 @@ const CreateAccount = () => {
                 <input type="email" name="email" required />
               </div>
             </div>
-            <div>
+            <div className="create-btn-container">
               <button className="submit-btn-ca" type="submit">
                 {loading ? "Creating Account..." : "Submit"}
               </button>

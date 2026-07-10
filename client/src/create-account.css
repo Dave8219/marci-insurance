@@ -53,3 +53,7 @@
 .error-message {
   color: white;
 }
+
+.create-account-page .create-btn-container {
+  text-align: center;
+}
