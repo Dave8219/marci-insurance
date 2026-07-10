@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./reset-password.css";
+import logo from "./assets/barrera-logo-no-background.png";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -93,37 +94,56 @@ const ResetPassword = () => {
   }
 
   return (
-    <div className="reset-page">
-      <div className="reset-card">
-        <h1>Reset Password</h1>
+    <>
+      <header className="site-header">
+        <div className="logo">
+          <Link to="/login">
+            <img src={logo} className="img-logo" />
+          </Link>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>New Password</label>
+        <div className="tagline">
+          <h5>Helping you today for the future!</h5>
+        </div>
+      </header>
 
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+      <div className="reset-page">
+        <div className="reset-card">
+          <h1>Reset Password</h1>
 
-          <div className="form-group">
-            <label>Confirm Password</label>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>New Password</label>
 
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          <button className="reset-btn" type="submit">
-            Reset Password
-          </button>
-        </form>
+            <div className="form-group">
+              <label>Confirm Password</label>
+
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+
+            <button className="reset-btn" type="submit">
+              Reset Password
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+      <footer>
+        <p className="footer-text-reset-page">
+          © 2026 Marci Insurance. All rights reserved.
+        </p>
+      </footer>
+    </>
   );
 };
 

@@ -17,6 +17,7 @@ import About from "./About.jsx";
 import Contact from "./Contact.jsx";
 import CreateAccount from "./CreateAccount.jsx";
 import ResetPassword from "./ResetPassword.jsx";
+import ProtectedRoute from "./ProtectedRoute";
 function App() {
   // const [count, setCount] = useState(0)
   /*
@@ -145,12 +146,35 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/clients" element={<Clients />} />
 
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/leads"
+          element={
+            <ProtectedRoute>
+              <Leads />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clients"
+          element={
+            <ProtectedRoute>
+              <Clients />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/health-insurance" element={<HealthInsurance />} />

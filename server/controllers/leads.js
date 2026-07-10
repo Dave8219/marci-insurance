@@ -1,5 +1,5 @@
 const { pool } = require("../db/connect.js");
-const sendLeadEmail = require("../utils/leadMail.js");
+const { sendLeadEmail } = require("../utils/leadMail.js");
 
 // user logs in to see all leads
 const getAllLeads = async (req, res) => {

@@ -18,9 +18,20 @@ New Lead:
 Name: ${lead.name},
 Email: ${lead.email},
 Phone: ${lead.phone},
-Insurance: ${lead.insurance_type}
+Insurance: ${lead.insurance_type || "N/A"}
+Message: ${lead.message || "No message provided"}
 `,
   });
 };
 
-module.exports = sendLeadEmail;
+const sendEmail = async ({ to, subject, text, html }) => {
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to,
+    subject,
+    text,
+    html,
+  });
+};
+
+module.exports = { sendLeadEmail, sendEmail };

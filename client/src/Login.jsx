@@ -134,8 +134,8 @@ const Login = () => {
             <button className="login-btn" onClick={handleLogin}>
               Login
             </button>
-            {message && <p className="error-login-msg">{message}</p>}
           </div>
+          <div>{message && <p className="error-login-msg">{message}</p>}</div>
 
           <div>
             <button

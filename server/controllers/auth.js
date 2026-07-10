@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+const { sendEmail } = require("../utils/leadMail.js");
 const crypto = require("crypto");
 
 const { pool } = require("../db/connect.js");
@@ -164,24 +164,32 @@ const forgotPassword = async (req, res) => {
     ]);
 
     if (user.length === 0) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: "If an account exists, a recovery email has been sent.",
       });
     }
 
     const resetToken = crypto.randomBytes(32).toString("hex");
 
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
     await pool.execute(
       "UPDATE users SET reset_token = ?, reset_token_expire = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE id = ?",
+      [hashedToken, user[0].id],
+      /*
       [resetToken, user[0].id],
+      */
     );
 
-    const resetURL = `http://localhost:5173/reset-password?token=${resetToken}`;
+    const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
     await sendEmail({
       to: email,
       subject: "Password Reset",
-      text: `Click this link to reset your password: ${resetURL}`,
+      text: `Click this link to reset your password:\n\n${resetURL}`,
     });
 
     res.status(200).json({
@@ -200,6 +208,8 @@ const verifyResetToken = async (req, res) => {
   const { token } = req.params;
 
   try {
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
     const [user] = await pool.query(
       `
       SELECT id 
@@ -207,7 +217,7 @@ const verifyResetToken = async (req, res) => {
       WHERE reset_token = ?
       AND reset_token_expire > NOW()
       `,
-      [token],
+      [hashedToken],
     );
 
     if (user.length === 0) {
@@ -233,6 +243,8 @@ const resetPassword = async (req, res) => {
   const { password } = req.body;
 
   try {
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
     const [user] = await pool.query(
       `
       SELECT id 
@@ -240,7 +252,7 @@ const resetPassword = async (req, res) => {
       WHERE reset_token = ?
       AND reset_token_expire > NOW()
       `,
-      [token],
+      [hashedToken],
     );
 
     if (user.length === 0) {
@@ -274,6 +286,12 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const getCurrentUser = async (req, res) => {
+  res.status(200).json({
+    user: req.user,
+  });
+};
+
 module.exports = {
   login,
   createAccount,
@@ -282,4 +300,5 @@ module.exports = {
   forgotPassword,
   verifyResetToken,
   resetPassword,
+  getCurrentUser,
 };
