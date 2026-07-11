@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import "./about.css";
 import RenderFooter from "./RenderFooter";
 import RenderHeader from "./RenderHeader";
+import familyPlaying from "./assets/about-me-family-playing-copy.png";
+import marciPicture from "./assets/marci-picture.jpeg";
+const images = {
+  familyPlaying,
+  marciPicture,
+};
 
 const About = () => {
   return (
@@ -13,7 +19,7 @@ const About = () => {
         <section className="about-hero">
           <div>
             <img
-              src="src/assets/about-me-family-playing-copy.png"
+              src={images.familyPlaying}
               className="about-me-hero"
               alt="A Picture of a Family Playing"
             />
@@ -34,7 +40,7 @@ const About = () => {
             {/* MOBILE IMAGE */}
             <div className="hero-image-mobile-about">
               <img
-                src="src/assets/marci-picture.jpeg"
+                src={images.marciPicture}
                 className="marci-picture"
                 alt="A Picture of Insurance Agent"
               />
@@ -68,7 +74,7 @@ const About = () => {
 
           <div className="marci-picture-container">
             <img
-              src="src/assets/marci-picture.jpeg"
+              src={images.marciPicture}
               className="marci-picture"
               alt="A Picture of Insurance Agent"
             />

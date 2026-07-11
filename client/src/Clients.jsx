@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./clients.css";
+import logo from "./assets/barrera-logo-no-background.png";
+
+const images = {
+  logo,
+};
 
 const mapClientFromAPI = (client) => ({
   id: client.id,
@@ -303,7 +308,7 @@ const handleRemove = async (id) => {
           <div className="logo">
             <Link to="/dashboard">
               <img
-                src="src/assets/barrera-logo-no-background.png"
+                src={images.logo}
                 className="img-logo"
                 alt="image of business logo"
               />

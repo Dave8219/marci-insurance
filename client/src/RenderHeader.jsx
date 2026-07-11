@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import logo from "./assets/barrera-logo-no-background.png";
+import marciBanner from "./assets/marci-picture.jpeg";
+const images = {
+  logo,
+  marciBanner,
+};
 
 const RenderHeader = () => {
   useEffect(() => {
@@ -23,10 +29,7 @@ const RenderHeader = () => {
     <header className="site-header">
       <div className="logo">
         <Link to="/">
-          <img
-            src="src/assets/barrera-logo-no-background.png"
-            className="img-logo"
-          />
+          <img src={images.logo} className="img-logo" />
         </Link>
       </div>
 
@@ -49,7 +52,7 @@ const RenderHeader = () => {
 
       <div className="contact-info">
         <img
-          src="/src/assets/marci-picture.jpeg"
+          src={images.marciBanner}
           alt="Picture of Insurance Agent"
           className="ins-agent-picture"
         />

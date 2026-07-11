@@ -2,6 +2,29 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import "./home.css";
+import logo from "./assets/barrera-logo-no-background.png";
+import agent from "./assets/marci-picture.jpeg";
+import flowers from "./assets/flowers.jpeg";
+import happyFamily from "./assets/happy-family.png";
+import insAgent from "./assets/cs-agent.png";
+import piggyBank from "./assets/ins-savings.png";
+import couple from "./assets/life-ins.png";
+import familyBubbles from "./assets/family-bubbles.png";
+import serviceAgent from "./assets/service-agent-customer.png";
+import barreraLogo from "./assets/m-barrera-logo.png";
+const images = {
+  logo,
+  agent,
+  flowers,
+  insAgent,
+  happyFamily,
+  insAgent,
+  piggyBank,
+  couple,
+  familyBubbles,
+  serviceAgent,
+  barreraLogo,
+};
 
 const mapLeadFromAPI = (lead) => ({
   id: lead.id,
@@ -198,10 +221,7 @@ const Home = () => {
       </div>
       <header className="site-header">
         <div className="logo">
-          <img
-            src="src/assets/barrera-logo-no-background.png"
-            className="img-logo"
-          />
+          <img src={images.logo} className="img-logo" />
         </div>
 
         <nav className="nav-links">
@@ -223,7 +243,7 @@ const Home = () => {
 
         <div className="contact-info">
           <img
-            src="/src/assets/marci-picture.jpeg"
+            src={images.agent}
             alt="Picture of Insurance Agent"
             className="ins-agent-picture"
           />
@@ -261,7 +281,7 @@ const Home = () => {
         <section className="hero-image-box">
           <img
             className="hero-image"
-            src="src/assets/flowers.jpeg"
+            src={images.flowers}
             alt="a picture of flowers in a field"
           />
           <div className="hero-box">
@@ -298,7 +318,7 @@ const Home = () => {
                 </div>
                 <div className="family-image-wrapper">
                   <img
-                    src="src/assets/happy-family.png"
+                    src={images.happyFamily}
                     alt="a happy family of 4"
                     className="family-image"
                   />
@@ -362,7 +382,7 @@ const Home = () => {
                   today!
                 </h1>
 
-                <img src="src/assets/cs-agent.png" />
+                <img src={images.insAgent} />
 
                 <div className="hero-buttons">
                   <Link to="/contact" className="primary-btn">
@@ -445,7 +465,7 @@ const Home = () => {
               </div>
               <div>
                 <img
-                  src="src/assets/ins-savings.png"
+                  src={images.piggyBank}
                   alt="piggy bank and stethoscope"
                   className="service-img"
                 />
@@ -470,7 +490,7 @@ const Home = () => {
 
               <div>
                 <img
-                  src="src/assets/life-ins.png"
+                  src={images.couple}
                   alt="a couple looking at a laptop"
                   className="service-img"
                 />
@@ -496,7 +516,7 @@ const Home = () => {
 
               <div>
                 <img
-                  src="src/assets/family-bubbles.png"
+                  src={images.familyBubbles}
                   alt="family playing with bubbles outdoors"
                   className="service-img"
                 />
@@ -525,7 +545,7 @@ const Home = () => {
               </div>
               <div>
                 <img
-                  src="src/assets/service-agent-customer.png"
+                  src={images.serviceAgent}
                   alt="Insurance Consultation - agent meeting with a couple"
                   className="why-image"
                 />
@@ -570,7 +590,7 @@ const Home = () => {
         <div className="footer-grid">
           <div>
             <img
-              src="src/assets/m-barrera-logo.png"
+              src={images.barreraLogo}
               alt="company logo"
               className="img-logo-2"
             />

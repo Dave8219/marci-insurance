@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import axios from "axios";
 import "./login.css";
+import logo from "./assets/barrera-logo-no-background.png";
+
+const images = {
+  logo,
+};
 
 const Login = () => {
   /*
@@ -93,10 +98,7 @@ const Login = () => {
         <header className="site-header">
           <div className="logo">
             <Link to="/login">
-              <img
-                src="src/assets/barrera-logo-no-background.png"
-                className="img-logo"
-              />
+              <img src={images.logo} className="img-logo" />
             </Link>
           </div>
 

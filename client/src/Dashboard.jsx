@@ -2,8 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./dashboard.css";
-
+import logo from "./assets/barrera-logo-no-background.png";
 import { Link } from "react-router-dom";
+
+const images = {
+  logo,
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -30,10 +34,7 @@ const Dashboard = () => {
         <header className="site-header">
           <div className="logo">
             <Link to="/dashboard">
-              <img
-                src="src/assets/barrera-logo-no-background.png"
-                className="img-logo"
-              />
+              <img src={images.logo} className="img-logo" />
             </Link>
           </div>
           <div className="logout-box" onClick={handleLogout}>

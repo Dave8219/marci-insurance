@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./create-account.css";
+import logo from "./assets/barrera-logo-no-background.png";
+
+const images = {
+  logo,
+};
+
 const CreateAccount = () => {
   const [value, setValue] = useState(0);
   const [message, setMessage] = useState("");
@@ -45,10 +51,7 @@ const CreateAccount = () => {
         <header className="site-header">
           <div className="logo">
             <Link to="/login">
-              <img
-                src="src/assets/barrera-logo-no-background.png"
-                className="img-logo"
-              />
+              <img src={images.logo} className="img-logo" />
             </Link>
           </div>
 

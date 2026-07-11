@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import "./health-insurance.css";
 import RenderHeader from "./RenderHeader";
 import RenderFooter from "./RenderFooter";
+import nurse from "./assets/nurse-heart.jpg";
+import wellBeing from "./assets/well-being.png";
+const images = {
+  nurse,
+  wellBeing,
+};
 
 const HealthInsurance = () => {
   return (
@@ -11,7 +17,7 @@ const HealthInsurance = () => {
       <div className="health-insurance-page">
         <section className="health-hero">
           <video autoPlay muted loop playsInline className="video-player">
-            <source src="src/assets/pt-patient.mp4" type="video/mp4" />
+            <source src="/public/Pt-patient.mp4" type="video/mp4" />
           </video>
 
           <div className="video-overlay"></div>
@@ -40,7 +46,7 @@ const HealthInsurance = () => {
 
               <div className="coverage-image-mobile">
                 <img
-                  src="src/assets/nurse-heart.jpg"
+                  src={images.nurse}
                   alt="Health Insurance Services"
                   className="nurse-heart-mobile"
                 />
@@ -82,7 +88,7 @@ const HealthInsurance = () => {
 
             <div className="coverage-image">
               <img
-                src="src/assets/nurse-heart.jpg"
+                src={images.nurse}
                 alt="Health Insurance Services"
                 className="nurse-heart"
               />
@@ -131,7 +137,7 @@ const HealthInsurance = () => {
         <section className="extras-section">
           <div className="extras-image">
             <img
-              src="src/assets/well-being.png"
+              src={images.wellBeing}
               alt="Dental and Vision Coverage"
               className="relax-outdoors"
             />
@@ -144,7 +150,7 @@ const HealthInsurance = () => {
 
             <div className="extras-image-mobile">
               <img
-                src="src/assets/well-being.png"
+                src={images.wellBeing}
                 alt="Dental and Vision Coverage"
                 className="relax-outdoors-mobile"
               />

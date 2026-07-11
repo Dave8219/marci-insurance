@@ -4,6 +4,10 @@ import axios from "axios";
 import "./reset-password.css";
 import logo from "./assets/barrera-logo-no-background.png";
 
+const images = {
+  logo,
+};
+
 const ResetPassword = () => {
   const { token } = useParams();
 
@@ -98,7 +102,7 @@ const ResetPassword = () => {
       <header className="site-header">
         <div className="logo">
           <Link to="/login">
-            <img src={logo} className="img-logo" />
+            <img src={images.logo} className="img-logo" />
           </Link>
         </div>
 

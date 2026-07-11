@@ -4,6 +4,17 @@ import RenderHeader from "./RenderHeader";
 import RenderFooter from "./RenderFooter";
 import "./medicare.css";
 import { FaCheckCircle } from "react-icons/fa";
+import oldCouple from "./assets/old-couple.jpg";
+import insuranceAgent from "./assets/insurance-explanation.jpg";
+import oldCoupleBikes from "./assets/old-couple-bikes.png";
+import elderlyCouple from "./assets/elderly-couple-bench.png";
+const images = {
+  oldCouple,
+  insuranceAgent,
+  oldCoupleBikes,
+  elderlyCouple,
+};
+
 const Medicare = () => {
   const pageRef = useRef(null);
 
@@ -39,7 +50,7 @@ const Medicare = () => {
             {/* MOBILE IMAGE */}
             <div className="hero-image-mobile">
               <img
-                src="/src/assets/old-couple.jpg"
+                src={images.oldCouple}
                 alt="Old Couple"
                 className="hero-image"
               />
@@ -63,7 +74,7 @@ const Medicare = () => {
 
           <div className="hero-image-container">
             <img
-              src="/src/assets/old-couple.jpg"
+              src={images.oldCouple}
               alt="Old Couple"
               className="hero-image"
             />
@@ -127,7 +138,7 @@ const Medicare = () => {
 
             <div className="why-image-container">
               <img
-                src="src/assets/insurance-explanation.jpg"
+                src={images.insuranceAgent}
                 alt="Young Agent Talking to an Elderly Person"
                 className="why-image"
               />
@@ -144,7 +155,7 @@ const Medicare = () => {
 
             <div className="turning-icon-mobile">
               <img
-                src="/src/assets/old-couple-bikes.png"
+                src={images.oldCoupleBikes}
                 className="old-couple-bikes"
                 alt="Old Couple Riding Bikes"
               />
@@ -175,7 +186,7 @@ const Medicare = () => {
 
           <div className="turning-icon">
             <img
-              src="/src/assets/old-couple-bikes.png"
+              src={images.oldCoupleBikes}
               className="old-couple-bikes"
               alt="Old Couple Riding Bikes"
             />
@@ -288,7 +299,7 @@ const Medicare = () => {
 
           <div className="elderly-couple-bench-container">
             <img
-              src="src/assets/elderly-couple-bench.png"
+              src={images.elderlyCouple}
               alt="Elderly Couple Sitting in a Bench"
               className="elderly-couple-bench"
             />

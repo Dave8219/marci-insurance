@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import barreraLogo from "./assets/m-barrera-logo.png";
+
+const images = {
+  barreraLogo,
+};
 
 const RenderFooter = () => {
   return (
@@ -7,7 +12,7 @@ const RenderFooter = () => {
         <div className="footer-grid">
           <div>
             <img
-              src="src/assets/m-barrera-logo.png"
+              src={images.barreraLogo}
               alt="company logo"
               className="img-logo-2"
             />

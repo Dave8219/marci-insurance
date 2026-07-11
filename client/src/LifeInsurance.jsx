@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import RenderFooter from "./RenderFooter";
 import RenderHeader from "./RenderHeader";
 import "./life-insurance.css";
+import happyFamily from "./assets/happy-family-playing.jpg";
+import financialPlanning from "./assets/financial-planning.png";
+import familyProtection from "./assets/family-protection.png";
+import financialSupport from "./assets/financial-support.png";
+import talkingFriends from "./assets/young-old-talking-copy.png";
+const images = {
+  happyFamily,
+  financialPlanning,
+  familyProtection,
+  financialSupport,
+  talkingFriends,
+};
+
 const LifeInsurance = () => {
   const pageRef = useRef(null);
 
@@ -39,7 +52,7 @@ const LifeInsurance = () => {
             {/* MOBILE IMAGE */}
             <div className="hero-image-mobile-life">
               <img
-                src="/src/assets/happy-family-playing.jpg"
+                src={images.happyFamily}
                 alt="Family"
                 className="hero-image-life"
               />
@@ -61,11 +74,7 @@ const LifeInsurance = () => {
           </div>
 
           <div className="hero-visual">
-            <img
-              src="/src/assets/happy-family-playing.jpg"
-              alt="Family"
-              className="blob-image"
-            />
+            <img src={images.happyFamily} alt="Family" className="blob-image" />
 
             <div className="floating-tag">Peace of Mind Coverage</div>
           </div>
@@ -88,7 +97,7 @@ const LifeInsurance = () => {
             <div className="life-why-card">
               <h3>Financial Planning</h3>
               <img
-                src="src/assets/financial-planning.png"
+                src={images.financialPlanning}
                 className="financial-planning"
                 alt="An Older Couple Talks With a Financial Planner"
               />
@@ -104,7 +113,7 @@ const LifeInsurance = () => {
             <div className="life-why-card">
               <h3>Protection for Your Family</h3>
               <img
-                src="src/assets/family-protection.png"
+                src={images.familyProtection}
                 className="family-protection"
                 alt="A Mom Protecting Daughter From the Rain"
               />
@@ -119,7 +128,7 @@ const LifeInsurance = () => {
             <div className="life-why-card">
               <h3>Support Now & for The Future</h3>
               <img
-                src="src/assets/financial-support.png"
+                src={images.financialSupport}
                 className="financial-support"
                 alt="A Piggy Bank Balances On Boards"
               />
@@ -158,10 +167,7 @@ const LifeInsurance = () => {
         {/* SIMPLE EXPLANATION SECTION */}
         <section className="simple-section hidden">
           <div className="simple-image">
-            <img
-              src="/src/assets/young-old-talking-copy.png"
-              className="simple-image-img"
-            />
+            <img src={images.talkingFriends} className="simple-image-img" />
           </div>
 
           <div className="simple-text">
@@ -170,10 +176,7 @@ const LifeInsurance = () => {
             {/* MOBILE IMAGE */}
 
             <div className="simple-image-mobile">
-              <img
-                src="/src/assets/young-old-talking-copy.png"
-                className="simple-image-img"
-              />
+              <img src={images.talkingFriends} className="simple-image-img" />
             </div>
 
             <h5>

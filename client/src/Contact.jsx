@@ -3,6 +3,11 @@ import axios from "axios";
 import "./contact.css";
 import RenderHeader from "./RenderHeader";
 import RenderFooter from "./RenderFooter";
+import contactHero from "./assets/contact-hero-image.png";
+
+const images = {
+  contactHero,
+};
 
 const mapLeadFromAPI = (lead) => ({
   id: lead.id,
@@ -135,7 +140,7 @@ const Contact = () => {
       <div className="contact-page" ref={pageRef}>
         <section className="contact-hero hidden">
           <div className="hero-image">
-            <img src="/src/assets/contact-hero-image.png" alt="Contact" />
+            <img src={images.contactHero} alt="Contact" />
           </div>
 
           <div className="hero-text">

@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./leads.css";
+import logo from "./assets/barrera-logo-no-background.png";
+
 // import { leads } from "./leads.js";
+
+const images = {
+  logo,
+};
 
 const mapLeadFromAPI = (lead) => ({
   id: lead.id,
@@ -502,7 +508,7 @@ setMyLeads(updatedLeads);
           <div className="logo">
             <Link to="/dashboard">
               <img
-                src="src/assets/barrera-logo-no-background.png"
+                src={images.logo}
                 className="img-logo"
                 alt="image of business logo"
               />
