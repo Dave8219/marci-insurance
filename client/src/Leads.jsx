@@ -258,16 +258,16 @@ const Leads = () => {
       const response = await axios.patch(
         `${API}/api/v1/update-lead/${updatedLead.id}`,
         {
-          withCredentials: true,
-        },
-
-        {
           status: updatedLead.status,
           name: updatedLead.name,
           email: updatedLead.email,
           phone: updatedLead.phone,
           insurance_type: updatedLead.insuranceType,
           admin_note: updatedLead.adminNote,
+        },
+
+        {
+          withCredentials: true,
         },
       );
 

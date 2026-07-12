@@ -133,10 +133,6 @@ const Clients = () => {
       const response = await axios.patch(
         `${API}/api/v1/update-client/${id}`,
         {
-          withCredentials: true,
-        },
-
-        {
           policy: editValues.policy,
           name: editValues.name,
           address: editValues.address,
@@ -145,6 +141,10 @@ const Clients = () => {
           insurance_type: editValues.insuranceType,
           enrollment_date: editValues.enrollmentDate,
           notes: editValues.notes,
+        },
+
+        {
+          withCredentials: true,
         },
       );
 
