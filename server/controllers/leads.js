@@ -173,20 +173,46 @@ const bulkDeleteLeads = async (req, res) => {
 
 const updateLead = async (req, res) => {
   try {
-    const { status, name, email, phone, insurance_type, admin_note } = req.body;
+    const fields = [];
+    const values = [];
 
-    const update = await pool.execute(
-      `UPDATE leads SET status = ?, name = ?, email = ?, phone = ?, insurance_type = ?, admin_note = ? WHERE id = ?`,
-      [status, name, email, phone, insurance_type, admin_note, req.params.id],
+    const allowedFields = [
+      "status",
+      "name",
+      "email",
+      "phone",
+      "insurance_type",
+      "admin_note",
+    ];
+
+    allowedFields.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        fields.push(`${field} = ?`);
+        values.push(req.body[field]);
+      }
+    });
+
+    if (fields.length === 0) {
+      return res.status(400).json({ message: "No fields to update" });
+    }
+
+    values.push(req.params.id);
+
+    const [update] = await pool.execute(
+      `UPDATE leads SET ${fields.join(", ")} WHERE id = ?`,
+      values,
     );
 
     if (update.affectedRows === 0) {
-      return res.status(404).json({ message: "update not successful" });
+      return res.status(404).json({ message: "Lead not found" });
     }
-    return res.status(200).json({ message: "lead updated successfully" });
+
+    return res.status(200).json({
+      message: "Lead updated successfully",
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
     console.log(err);
+    res.status(500).json({ error: err.message });
   }
 };
 
