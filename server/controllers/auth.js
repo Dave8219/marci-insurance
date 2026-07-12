@@ -40,8 +40,8 @@ const login = async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false, // change to true when deployed HTTPS
-    sameSite: "lax",
+    secure: true, // change to true when deployed HTTPS
+    sameSite: "none",
   });
 
   // use later when deployed on https
