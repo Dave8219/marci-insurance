@@ -30,16 +30,16 @@ app.use(
   }),
 );
 
+const limiter = rateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
 app.use(limiter);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", leads);
 app.use("/api/v1", clients);
-
-const limiter = rateLimiter({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend is running" });
