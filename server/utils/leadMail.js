@@ -1,9 +1,42 @@
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+/*
 console.log("EMAIL_USER:", process.env.EMAIL_USER);
 console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
 console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
+*/
 
+const sendLeadEmail = async (lead) => {
+  await resend.emails.send({
+    from: process.env.EMAIL_FROM,
+    to: process.env.ADMIN_EMAIL,
+    subject: "New Lead Created",
+    text: `
+New Lead:
+
+Name: ${lead.name}
+Email: ${lead.email}
+Phone: ${lead.phone}
+Insurance: ${lead.insurance_type || "N/A"}
+Message: ${lead.message || "No message provided"}
+`,
+  });
+};
+
+const sendEmail = async ({ to, subject, text, html }) => {
+  await resend.emails.send({
+    from: process.env.EMAIL_FROM,
+    to,
+    subject,
+    text,
+    html,
+  });
+};
+
+/*
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -40,5 +73,5 @@ const sendEmail = async ({ to, subject, text, html }) => {
     html,
   });
 };
-
+*/
 module.exports = { sendLeadEmail, sendEmail };
