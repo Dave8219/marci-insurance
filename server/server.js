@@ -20,12 +20,17 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(helmet());
+// Add your Netlify URL here after you deploy the frontend
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
+
+app.use(limiter);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", leads);
@@ -35,8 +40,6 @@ const limiter = rateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
-
-app.use(limiter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend is running" });
