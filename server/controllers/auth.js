@@ -119,11 +119,11 @@ const createAccount = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.cookie("token", "", {
+  res.clearCookie("token", {
     httpOnly: true,
     expires: new Date(0),
-    secure: false, // change to true when deployed with HTTPS
-    sameSite: "lax",
+    secure: true, // change to true when deployed with HTTPS - false only during production
+    sameSite: "none",
   });
 
   res.status(200).json({
