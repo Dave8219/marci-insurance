@@ -17,7 +17,7 @@ const HealthInsurance = () => {
       <div className="health-insurance-page">
         <section className="health-hero">
           <video autoPlay muted loop playsInline className="video-player">
-            <source src="/public/Pt-patient.mp4" type="video/mp4" />
+            <source src="/Pt-Patient.mp4" type="video/mp4" />
           </video>
 
           <div className="video-overlay"></div>
