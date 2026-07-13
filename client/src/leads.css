@@ -3,6 +3,13 @@
   min-height: 100vh;
 }
 
+.leads-page .edit-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .head-title-container {
   display: flex;
   align-items: flex-end;

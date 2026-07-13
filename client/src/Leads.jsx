@@ -975,25 +975,26 @@ const RenderLeads = ({
                   setDraft({ ...draft, adminNote: e.target.value })
                 }
               />
+              <div className="edit-buttons">
+                <button
+                  onClick={async () => {
+                    await handleSave(draft);
+                    setActiveLead(draft);
+                    setMode("view");
+                  }}
+                >
+                  Save
+                </button>
 
-              <button
-                onClick={async () => {
-                  await handleSave(draft);
-                  setActiveLead(draft);
-                  setMode("view");
-                }}
-              >
-                Save
-              </button>
-
-              <button
-                onClick={() => {
-                  setDraft(activeLead);
-                  setMode("view");
-                }}
-              >
-                Cancel
-              </button>
+                <button
+                  onClick={() => {
+                    setDraft(activeLead);
+                    setMode("view");
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
             </>
           ) : (
             <>
