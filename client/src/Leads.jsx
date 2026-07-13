@@ -362,14 +362,9 @@ const Leads = () => {
 
     const response = await axios.post(
       `${API}/api/v1/admin/create-lead`,
-      {
-        withCredentials: true,
-      },
       payload,
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       },
     );
 
