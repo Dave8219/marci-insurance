@@ -245,13 +245,9 @@ const handleRemove = async (id) => {
       created_at: new Date().toISOString(),
     };
 
-    const response = await axios.post(
-      `${API}/api/v1/create-client`,
-      {
-        withCredentials: true,
-      },
-      payload,
-    );
+    const response = await axios.post(`${API}/api/v1/create-client`, payload, {
+      withCredentials: true,
+    });
     console.log("POST RESPONSE", response.data);
 
     setAddedClients((prev) => [...prev, mapClientFromAPI(response.data)]);
